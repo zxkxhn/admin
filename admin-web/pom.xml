@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <properties>
-        <admin-web.version>1.0-SNAPSHOT</admin-web.version>
+        <admin-client.version>1.0-SNAPSHOT</admin-client.version>
     </properties>
 
     <groupId>admin-web</groupId>
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>admin-client</groupId>
             <artifactId>admin-client</artifactId>
-            <version>${admin-web.version}</version>
+            <version>${admin-client.version}</version>
         </dependency>
 
         <!-- spring boot 类 -->
