@@ -1,1 +1,21 @@
+server.port: 8080
 
+spring:
+  profiles:
+    active: dev
+
+swagger:
+  enabled: true  #是否启用swagger，默认：true
+  title: 后台管理端 #标题
+  description: 后台管理端 #描述
+  version: @project.version@ #版本
+  license:  #许可证
+  licenseUrl:  #许可证URL
+  termsOfServiceUrl:  #服务条款URL
+  contact.name: zhangxk  #维护人
+  contact.url:   #维护人URL
+  contact.email: 980137428@qq.com #维护人email
+  base-package: com.zxk.admin.web #swagger扫描的基础包，默认：全扫描
+  base-path:  '/doc' #需要处理的基础URL规则，默认：/**
+  exclude-path:  #需要排除的URL规则，默认：空
+  host:  #文档的host信息，默认：空
