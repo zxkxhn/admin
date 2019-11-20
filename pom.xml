@@ -4,112 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zxk.admin</groupId>
+    <groupId>com.zxk</groupId>
     <artifactId>admin</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>13</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <skipTests>true</skipTests>
+    </properties>
 
     <modules>
         <module>admin-client</module>
         <module>admin-web</module>
     </modules>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>13</java.version>
-        <skipTests>true</skipTests>
-
-
-        <spring.boot.version>2.2.1.RELEASE</spring.boot.version>
-        <org.projectlombok.version>1.18.10</org.projectlombok.version>
-        <com.baomidou.mybatisplus.version>3.2.0</com.baomidou.mybatisplus.version>
-        <com.alibaba.fastjson>1.2.62</com.alibaba.fastjson>
-        <mysql.connector.version>8.0.18</mysql.connector.version>
-        <com.alibaba.druid.version>1.1.21</com.alibaba.druid.version>
-        <com.spring4all.swagger.version>1.9.0.RELEASE</com.spring4all.swagger.version>
-    </properties>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
-<!--        <relativePath/>-->
-    </parent>
-
-    <dependencyManagement>
-        <dependencies>
-            <!-- 简化编程 -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${org.projectlombok.version}</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!-- mybatis plus -->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${com.baomidou.mybatisplus.version}</version>
-            </dependency>
-
-            <!-- 阿里json -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${com.alibaba.fastjson}</version>
-            </dependency>
-            <!-- mysql的驱动 -->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.connector.version}</version>
-            </dependency>
-            <!-- sql 监控 -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${com.alibaba.druid.version}</version>
-            </dependency>
-
-            <!-- swagger 文档 -->
-            <dependency>
-                <groupId>com.spring4all</groupId>
-                <artifactId>swagger-spring-boot-starter</artifactId>
-                <version>${com.spring4all.swagger.version}</version>
-            </dependency>
-
-
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-aop</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <version>${spring.boot.version}</version>
-                <scope>test</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.junit.vintage</groupId>
-                        <artifactId>junit-vintage-engine</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 </project>
