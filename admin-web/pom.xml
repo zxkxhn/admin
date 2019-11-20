@@ -31,10 +31,13 @@
             <version>${admin-client.version}</version>
         </dependency>
 
+        <!-- 阿里json -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
+
+        <!-- 文档api -->
         <dependency>
             <groupId>com.spring4all</groupId>
             <artifactId>swagger-spring-boot-starter</artifactId>
