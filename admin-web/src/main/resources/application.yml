@@ -19,3 +19,5 @@ swagger:
   base-path:                                          #需要处理的基础URL规则，默认：/**
   exclude-path:                                       #需要排除的URL规则，默认：空
   host:                                               #文档的host信息，默认：空
+
+title: @parent.artifactId@
