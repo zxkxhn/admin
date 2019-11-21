@@ -23,6 +23,14 @@
         <skipTests>true</skipTests>
     </properties>
 
+    <!-- 工具类 -->
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
     <distributionManagement>
         <repository>
             <id>rdc-releases</id>
