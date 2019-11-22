@@ -4,9 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.zxk</groupId>
-        <artifactId>core</artifactId>
+        <artifactId>admin</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -14,6 +13,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>13</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <skipTests>true</skipTests>
 
         <admin-client.version>1.0-SNAPSHOT</admin-client.version>
@@ -32,21 +33,12 @@
             <version>${admin-client.version}</version>
         </dependency>
         <!-- api文档 -->
-        <dependency>
-            <groupId>com.spring4all</groupId>
-            <artifactId>swagger-spring-boot-starter</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>com.zxk</groupId>
             <artifactId>core</artifactId>
             <version>${com.zxk.core.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>*</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
     </dependencies>
@@ -56,19 +48,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <compilerArgs>
-                        <arg>-Xlint:deprecation</arg> <!-- 忽略代码中已过时API警告 -->
-                        <arg>-Xlint:unchecked</arg>   <!-- 忽略代码中未经检查或不安全的操作 -->
-                    </compilerArgs>
-                </configuration>
             </plugin>
         </plugins>
     </build>
