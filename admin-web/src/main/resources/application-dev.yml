@@ -14,7 +14,7 @@ spring:
       max-pool-prepared-statement-per-connection-size: 20
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 300000
-      #OracleĞèÒª´ò¿ª×¢ÊÍ
+      #Oracleéœ€è¦æ‰“å¼€æ³¨é‡Š
       validation-query: SELECT 1 FROM DUAL
       test-while-idle: true
       test-on-borrow: false
@@ -36,21 +36,21 @@ spring:
 
 #mybatis
 mybatis-plus:
-  #ÊµÌåÉ¨Ãè£¬¶à¸öpackageÓÃ¶ººÅ»òÕß·ÖºÅ·Ö¸ô
+  #å®ä½“æ‰«æï¼Œå¤šä¸ªpackageç”¨é€—å·æˆ–è€…åˆ†å·åˆ†éš”
   typeAliasesPackage: com.zxk.admin.domain.*
   global-config:
-    #Êı¾İ¿âÏà¹ØÅäÖÃ
+    #æ•°æ®åº“ç›¸å…³é…ç½®
     db-config:
-      #Ö÷¼üÀàĞÍ  AUTO:"Êı¾İ¿âID×ÔÔö", INPUT:"ÓÃ»§ÊäÈëID", ID_WORKER:"È«¾ÖÎ¨Ò»ID (Êı×ÖÀàĞÍÎ¨Ò»ID)", UUID:"È«¾ÖÎ¨Ò»ID UUID";
+      #ä¸»é”®ç±»å‹  AUTO:"æ•°æ®åº“IDè‡ªå¢", INPUT:"ç”¨æˆ·è¾“å…¥ID", ID_WORKER:"å…¨å±€å”¯ä¸€ID (æ•°å­—ç±»å‹å”¯ä¸€ID)", UUID:"å…¨å±€å”¯ä¸€ID UUID";
       id-type: AUTO
-      #×Ö¶Î²ßÂÔ IGNORED:"ºöÂÔÅĞ¶Ï",NOT_NULL:"·Ç NULL ÅĞ¶Ï"),NOT_EMPTY:"·Ç¿ÕÅĞ¶Ï"
+      #å­—æ®µç­–ç•¥ IGNORED:"å¿½ç•¥åˆ¤æ–­",NOT_NULL:"é NULL åˆ¤æ–­"),NOT_EMPTY:"éç©ºåˆ¤æ–­"
       field-strategy: NOT_NULL
-      #ÍÕ·åÏÂ»®Ïß×ª»»
+      #é©¼å³°ä¸‹åˆ’çº¿è½¬æ¢
       column-underline: true
       logic-delete-value: -1
       logic-not-delete-value: 0
     banner: false
-  #Ô­ÉúÅäÖÃ
+  #åŸç”Ÿé…ç½®
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: true
