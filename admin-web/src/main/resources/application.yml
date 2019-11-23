@@ -25,7 +25,10 @@ swagger:
 dubbo:
   scan:
     base-packages: com.zxk.admin.biz.service
-  protocol.name: @artifactId@
-  protocol.port: 10001
+  protocol:
+    name: @artifactId@
+    port: 20001
   registry:
-    address: zookeeper://hzajwj.cn:2181
+    address: zookeeper://47.106.243.8:2181
+  application:
+    name: @artifactId@
