@@ -1,6 +1,8 @@
 server.port: 8080
 
 spring:
+  application:
+    name: @parent.artifactId@
   profiles:
     active: dev
 
@@ -20,4 +22,10 @@ swagger:
   exclude-path:                                       #需要排除的URL规则，默认：空
   host:                                               #文档的host信息，默认：空
 
-title: @parent.artifactId@
+dubbo:
+  scan:
+    base-packages: com.zxk.admin.biz.service
+  protocol.name: @artifactId@
+  protocol.port: 10001
+  registry:
+    address: zookeeper://hzajwj.cn:2181
