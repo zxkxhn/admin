@@ -13,10 +13,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>13</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <skipTests>true</skipTests>
 
         <admin-client.version>1.0-SNAPSHOT</admin-client.version>
-        <com.zxk.version>1.0-SNAPSHOT</com.zxk.version>
+        <com.zxk.core.version>1.0-SNAPSHOT</com.zxk.core.version>
     </properties>
 
     <groupId>admin-web</groupId>
@@ -31,38 +33,14 @@
             <version>${admin-client.version}</version>
         </dependency>
         <!-- api文档 -->
-        <dependency>
-            <groupId>com.spring4all</groupId>
-            <artifactId>swagger-spring-boot-starter</artifactId>
-        </dependency>
-
-        <!-- 数据库类 -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
-
-        <!-- hutool 系列 -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
-        </dependency>
 
 
-        <!-- 核心包 -->
         <dependency>
             <groupId>com.zxk</groupId>
             <artifactId>core</artifactId>
-            <version>${com.zxk.version}</version>
+            <version>${com.zxk.core.version}</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -70,19 +48,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <compilerArgs>
-                        <arg>-Xlint:deprecation</arg> <!-- 忽略代码中已过时API警告 -->
-                        <arg>-Xlint:unchecked</arg>   <!-- 忽略代码中未经检查或不安全的操作 -->
-                    </compilerArgs>
-                </configuration>
             </plugin>
         </plugins>
     </build>
