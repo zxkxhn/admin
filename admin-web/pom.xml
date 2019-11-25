@@ -23,15 +23,39 @@
         <dependency>
             <groupId>admin-client</groupId>
             <artifactId>admin-client</artifactId>
-            <version>${admin-client.version}</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!-- api文档 -->
-
 
         <dependency>
             <groupId>com.zxk</groupId>
             <artifactId>core</artifactId>
             <version>${com.zxk.core.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-boot-starter</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-core</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
