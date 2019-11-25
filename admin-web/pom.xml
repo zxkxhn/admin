@@ -30,12 +30,6 @@
             <groupId>com.zxk</groupId>
             <artifactId>core</artifactId>
             <version>${com.zxk.core.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
