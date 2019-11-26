@@ -1,9 +1,9 @@
 package com.zxk.admin.biz.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * TODO
@@ -13,17 +13,18 @@ import lombok.Data;
  * @version 1.0
  */
 
-@ApiModel(description="用户实体")
 @Data
 @TableName("user")
 public class User {
 
-    @ApiModelProperty("用户编号")
-    private int id;
-    @ApiModelProperty("用户名称")
+    private long id;
     private String name;
-    @ApiModelProperty("用户手机号")
+    private int cityId;
     private String phone;
+    private boolean sex;
+    private String email;
+    private Date createTime;
+    private String password;
 
 }
 

@@ -1,10 +1,10 @@
 dataSources:
-  ds0: !!com.alibaba.druid.pool.DruidDataSource
+  order0: !!com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://hzajwj.cn:3307/order1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
-  ds1: !!com.alibaba.druid.pool.DruidDataSource
+  order1: !!com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://hzajwj.cn:3307/order2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
@@ -12,40 +12,26 @@ dataSources:
 
 shardingRule:
   tables:
-    t_order:
-      actualDataNodes: ds${0..1}.t_order${0..1}
-      databaseStrategy:
+    user:
+      actualDataNodes: order${0..1}.user_${0..1}    # 表库分布图 order_0.user_0,order_0.user_1 >>> order_0.user_${0..1}
+      databaseStrategy:                              # 分库逻辑
         inline:
-          shardingColumn: user_id
-          algorithmExpression: ds${user_id % 2}
-      tableStrategy:
+          shardingColumn: id
+          algorithmExpression: order${id % 2}
+      tableStrategy:                                 # 分表逻辑
         inline:
-          shardingColumn: order_id
-          algorithmExpression: t_order${order_id % 2}
-      keyGenerator:
+          shardingColumn: id
+          algorithmExpression: user_${id % 2 % 2}
+      keyGenerator:                                  # 算法
         type: SNOWFLAKE
-        column: order_id
-    t_order_item:
-      actualDataNodes: ds${0..1}.t_order_item${0..1}
-      databaseStrategy:
-        inline:
-          shardingColumn: user_id
-          algorithmExpression: ds${user_id % 2}
-      tableStrategy:
-        inline:
-          shardingColumn: order_id
-          algorithmExpression: t_order_item${order_id % 2}
-  bindingTables:
-    - t_order,t_order_item
-  broadcastTables:
-    - t_config
+        column: id
 
-  defaultDataSourceName: ds0
+  defaultDataSourceName: order0                     # 不分表的库
   defaultTableStrategy:
     none:
   defaultKeyGenerator:
     type: SNOWFLAKE
-    column: order_id
+    column: id
 
 props:
     sql.show: true
