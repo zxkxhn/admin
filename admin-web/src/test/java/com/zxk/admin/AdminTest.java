@@ -57,8 +57,6 @@ class AdminTest{
 
 
         System.out.println(JSONObject.toJSONString(addressDao.selectList(new QueryWrapper<>())));
-
-
     }
 
 
