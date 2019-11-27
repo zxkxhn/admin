@@ -21,7 +21,7 @@ shardingRule:
       tableStrategy:                                 # 分表逻辑
         standard:
           shardingColumn: id
-          preciseAlgorithmClassName: com.zxk.core.config.ShardingSphere.MyPreciseShardingAlgorithm
+          preciseAlgorithmClassName: com.zxk.core.config.ShardingSphere.HashPreciseShardingAlgorithm
       keyGenerator:                                  # 算法
         type: SNOWFLAKE
         column: id
