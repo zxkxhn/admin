@@ -11,11 +11,8 @@ import com.zxk.admin.biz.domain.Address;
 import com.zxk.admin.biz.domain.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootTest
 class AdminTest {
@@ -79,5 +76,11 @@ class AdminTest {
         System.out.println(userDao.selectCount(new QueryWrapper<>()));
     }
 
+
+    @Test
+    public void test_05(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        System.out.println(userDao.getAll(queryWrapper));
+    }
 
 }
