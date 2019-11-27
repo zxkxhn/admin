@@ -14,7 +14,7 @@ shardingRule:
   tables:
     user:
       actualDataNodes: order${0..1}.user_${0..1}    # 表库分布图 order_0.user_0,order_0.user_1 >>> order_0.user_${0..1}
-      databaseStrategy:                              # 分库逻辑
+      databaseStrategy:                              # 分库逻辑 非必须
         inline:
           shardingColumn: id
           algorithmExpression: order${id % 2}
