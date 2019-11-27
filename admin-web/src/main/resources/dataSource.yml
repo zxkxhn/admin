@@ -13,7 +13,7 @@ dataSources:
 shardingRule:
   tables:
     user:
-      actualDataNodes: order${0..1}.user_${0..1}    # 表库分布图 order_0.user_0,order_0.user_1 >>> order_0.user_${0..1}
+      actualDataNodes: order${0..1}.user_${0..4}    # 表库分布图 order_0.user_0,order_0.user_1 >>> order_0.user_${0..1}
       databaseStrategy:                              # 分库逻辑 非必须
         inline:
           shardingColumn: id
@@ -21,14 +21,11 @@ shardingRule:
       tableStrategy:                                 # 分表逻辑
         inline:
           shardingColumn: id
-          algorithmExpression: user_${id % 2 % 2}
+          algorithmExpression: user_${id % 8}
       keyGenerator:                                  # 算法
         type: SNOWFLAKE
         column: id
-
-  defaultDataSourceName: order0                     # 不分表的库
-  defaultTableStrategy:
-    none:
+  defaultDataSourceName: order1
   defaultKeyGenerator:
     type: SNOWFLAKE
     column: id

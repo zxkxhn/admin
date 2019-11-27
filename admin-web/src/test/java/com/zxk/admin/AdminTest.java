@@ -11,11 +11,14 @@ import com.zxk.admin.biz.domain.Address;
 import com.zxk.admin.biz.domain.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
-class AdminTest{
+class AdminTest {
 
     @Resource
     private UserDao userDao;
@@ -24,9 +27,9 @@ class AdminTest{
 
     @Test
     void test_01() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             User user = new User();
-            user.setCityId(RandomUtil.randomInt(1,5000));
+            user.setCityId(RandomUtil.randomInt(1, 5000));
             user.setCreateTime(DateUtil.date());
             user.setName(RandomUtil.randomString(RandomUtil.randomInt(5)));
             user.setPassword(SecureUtil.md5(RandomUtil.randomString(RandomUtil.randomInt(5))));
@@ -34,10 +37,12 @@ class AdminTest{
             userDao.insert(user);
         }
 
+        System.out.println(userDao.selectCount(new QueryWrapper<>()));
+
     }
 
     @Test
-    void test_02(){
+    void test_02() {
         System.out.println(JSONObject.toJSONString(userDao.selectById(406188693116682241L)));
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(User::getName, "ylm5");
@@ -46,7 +51,7 @@ class AdminTest{
     }
 
     @Test
-    void test_03(){
+    void test_03() {
         Address address = new Address();
         address.setCode(RandomUtil.randomString(32));
         address.setLit(RandomUtil.randomInt(10));
@@ -59,6 +64,20 @@ class AdminTest{
         System.out.println(JSONObject.toJSONString(addressDao.selectList(new QueryWrapper<>())));
     }
 
+
+    @Test
+    public void test_04() {
+        for (int i = 0; i < 10; i++) {
+            User user = new User();
+            user.setCityId(RandomUtil.randomInt(1, 5000));
+            user.setCreateTime(DateUtil.date());
+            user.setName(RandomUtil.randomString(RandomUtil.randomInt(5)));
+            user.setPassword(SecureUtil.md5(RandomUtil.randomString(RandomUtil.randomInt(5))));
+            user.setPhone(RandomUtil.randomInt(13) + "");
+            userDao.insert(user);
+        }
+        System.out.println(userDao.selectCount(new QueryWrapper<>()));
+    }
 
 
 }
