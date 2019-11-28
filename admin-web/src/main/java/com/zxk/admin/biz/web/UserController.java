@@ -39,17 +39,9 @@ public class UserController {
     @ApiOperation(value = "获取用户列表")
     public List<User> getUserList() {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        Page<User> page = new Page<>(2,2);
-        List<OrderItem> orderItems = new ArrayList<>();
-        OrderItem orderItem = new OrderItem();
-        orderItem.setColumn("id");
-        orderItem.setAsc(false);
-        orderItems.add(orderItem);
+        queryWrapper.lambda().orderByDesc(User::getName);
 
-        page.setOrders(orderItems);
-
-        IPage<User> page1 = userDao.selectPage(page, queryWrapper);
-        log.error(JSONObject.toJSONString(page1));
+        queryWrapper.last("limit 1 , 2");
         return userDao.selectList(queryWrapper);
     }
 
