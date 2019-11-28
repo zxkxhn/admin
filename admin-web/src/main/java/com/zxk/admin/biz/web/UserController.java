@@ -1,11 +1,12 @@
 package com.zxk.admin.biz.web;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zxk.admin.biz.dao.AddressDao;
 import com.zxk.admin.biz.dao.UserDao;
-import com.zxk.admin.biz.domain.Address;
+import com.zxk.admin.biz.domain.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -38,11 +39,11 @@ public class UserController {
 
     @GetMapping("/")
     @ApiOperation(value = "获取用户列表")
-    public List<Address> getUserList() {
-        Page<Address> page = new Page<>(1,2);
-        QueryWrapper<Address> queryWrapper = new QueryWrapper<>();
-        IPage<Address> iPage = addressDao.selectPage(page, queryWrapper);
-        System.out.println(iPage);
+    public List<User> getUserList() {
+        Page<User> page = new Page<>(5,2000);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        IPage<User> iPage = userDao.selectPage(page, queryWrapper);
+        System.out.println(JSONObject.toJSONString(iPage));
         return iPage.getRecords();
     }
 
