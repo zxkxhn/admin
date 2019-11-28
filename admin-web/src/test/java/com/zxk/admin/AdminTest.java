@@ -9,6 +9,7 @@ import com.zxk.admin.biz.dao.AddressDao;
 import com.zxk.admin.biz.dao.UserDao;
 import com.zxk.admin.biz.domain.Address;
 import com.zxk.admin.biz.domain.User;
+import com.zxk.core.util.RedisUtil;
 import io.lettuce.core.RedisClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,8 @@ class AdminTest {
 
     @Test
     public void test_06(){
+        RedisUtil.getSingleton().set("aaaa", "aaaa123123123");
+        System.out.println(RedisUtil.getSingleton().get("aaaa"));
     }
 
 }
