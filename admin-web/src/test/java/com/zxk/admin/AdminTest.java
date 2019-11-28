@@ -9,7 +9,10 @@ import com.zxk.admin.biz.dao.AddressDao;
 import com.zxk.admin.biz.dao.UserDao;
 import com.zxk.admin.biz.domain.Address;
 import com.zxk.admin.biz.domain.User;
+import io.lettuce.core.RedisClient;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -81,6 +84,11 @@ class AdminTest {
     public void test_05(){
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         System.out.println(userDao.getAll(queryWrapper));
+    }
+
+
+    @Test
+    public void test_06(){
     }
 
 }
