@@ -1,10 +1,6 @@
 package com.zxk.admin.biz.web;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zxk.admin.biz.dao.UserDao;
 import com.zxk.admin.biz.domain.User;
 import io.swagger.annotations.Api;
@@ -15,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -44,11 +39,6 @@ public class UserController {
         queryWrapper.last("limit 1 , 2");
         return userDao.selectList(queryWrapper);
     }
-
-
-
-
-
 
 
 }
