@@ -25,17 +25,18 @@ class AdminTest {
 
     @Test
     void test_01() {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100000; i++) {
             User user = new User();
             user.setCityId(RandomUtil.randomInt(1, 5000));
             user.setCreateTime(DateUtil.date());
             user.setName(RandomUtil.randomString(RandomUtil.randomInt(5)));
             user.setPassword(SecureUtil.md5(RandomUtil.randomString(RandomUtil.randomInt(5))));
             user.setPhone(RandomUtil.randomInt(13) + "");
-            userDao.insert(user);
+            RedisUtils.getSingleton().set(i + "", JSONObject.toJSONString(user));
+//            userDao.insert(user);
         }
 
-        System.out.println(userDao.selectCount(new QueryWrapper<>()));
+//        System.out.println(userDao.selectCount(new QueryWrapper<>()));
 
     }
 
