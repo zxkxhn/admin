@@ -5,12 +5,14 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.zxk.admin.biz.ao.TestAo;
 import com.zxk.admin.biz.dao.AddressDao;
 import com.zxk.admin.biz.dao.UserDao;
 import com.zxk.admin.biz.domain.Address;
 import com.zxk.admin.biz.domain.User;
 import com.zxk.core.util.RedisUtils;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -22,6 +24,8 @@ class AdminTest {
     private UserDao userDao;
     @Resource
     private AddressDao addressDao;
+    @Autowired
+    private TestAo testAo;
 
     @Test
     void test_01() {
@@ -90,6 +94,11 @@ class AdminTest {
     public void test_06(){
         RedisUtils.getSingleton().set("aaaa", "aaaa123123123");
         System.out.println(RedisUtils.getSingleton().get("aaaa"));
+    }
+
+    @Test
+    public void test_07() {
+        testAo.test();
     }
 
 }
