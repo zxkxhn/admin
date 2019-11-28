@@ -13,7 +13,7 @@ dataSources:
 shardingRule:
   tables:
     user:
-      actualDataNodes: order${0..1}.user_${0..3}    # 表库分布图 order_0.user_0,order_0.user_1 >>> order_0.user_${0..1}
+      actualDataNodes: order${0..1}.user_${0..3}     # 表库分布图 order_0.user_0,order_0.user_1 >>> order_0.user_${0..1}
       databaseStrategy:                              # 分库逻辑 非必须
         inline:
           shardingColumn: id
@@ -32,4 +32,4 @@ shardingRule:
 
 props:
     sql.show: true
-    max.connections.size.per.query: 8
+    max.connections.size.per.query: 8                # 查询线程数
