@@ -5,6 +5,8 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zxk.admin.biz.ao.TestAo;
 import com.zxk.admin.biz.dao.AddressDao;
 import com.zxk.admin.biz.dao.UserDao;
@@ -56,11 +58,8 @@ class AdminTest {
     @Test
     void test_03() {
         Address address = new Address();
-        address.setCode(RandomUtil.randomString(32));
         address.setLit(RandomUtil.randomInt(10));
-        address.setType(RandomUtil.randomInt(10));
         address.setName(RandomUtil.randomString(32));
-        address.setPid(RandomUtil.randomString(32));
         addressDao.insert(address);
 
 
@@ -99,6 +98,15 @@ class AdminTest {
     @Test
     public void test_07() {
         testAo.test();
+    }
+
+    @Test
+    public void test_08() {
+        Page<Address> page = new Page<>(1,2);
+        QueryWrapper<Address> queryWrapper = new QueryWrapper<>();
+        IPage<Address> iPage = addressDao.selectPage(page, queryWrapper);
+        System.out.println(iPage);
+
     }
 
 }

@@ -16,9 +16,6 @@ import lombok.Data;
 public class Address {
 
     private long id;
-    private String code;
     private String name;
-    private String pid;
-    private int type;
     private int lit;
 }

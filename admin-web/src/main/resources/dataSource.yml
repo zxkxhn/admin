@@ -25,7 +25,7 @@ shardingRule:
       keyGenerator:                                  # 算法
         type: SNOWFLAKE
         column: id
-  defaultDataSourceName: order1
+  defaultDataSourceName: order0
   defaultKeyGenerator:
     type: SNOWFLAKE
     column: id

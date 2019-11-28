@@ -1,8 +1,11 @@
 package com.zxk.admin.biz.web;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zxk.admin.biz.dao.AddressDao;
 import com.zxk.admin.biz.dao.UserDao;
-import com.zxk.admin.biz.domain.User;
+import com.zxk.admin.biz.domain.Address;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -30,14 +33,17 @@ public class UserController {
     @Resource
     private UserDao userDao;
 
+    @Resource
+    private AddressDao addressDao;
+
     @GetMapping("/")
     @ApiOperation(value = "获取用户列表")
-    public List<User> getUserList() {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().orderByDesc(User::getName);
-
-        queryWrapper.last("limit 1 , 2");
-        return userDao.selectList(queryWrapper);
+    public List<Address> getUserList() {
+        Page<Address> page = new Page<>(1,2);
+        QueryWrapper<Address> queryWrapper = new QueryWrapper<>();
+        IPage<Address> iPage = addressDao.selectPage(page, queryWrapper);
+        System.out.println(iPage);
+        return iPage.getRecords();
     }
 
 
