@@ -1,21 +1,17 @@
 package com.zxk.admin.biz.web;
 
-import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zxk.admin.biz.dao.AddressDao;
-import com.zxk.admin.biz.dao.UserDao;
-import com.zxk.admin.biz.domain.User;
+import com.zxk.admin.biz.form.UserForm;
+import com.zxk.core.util.Result;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import java.util.List;
+import javax.validation.Valid;
 
 
 /**
@@ -31,20 +27,15 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
 
-    @Resource
-    private UserDao userDao;
+    @ApiOperation(value = "新增用户", notes = "新增一个用户")
+    @ApiImplicitParam(name = "userForm", value = "新增用户form表单", required = true, dataType = "UserForm")
+    @PostMapping
+    public Result add(@Valid @RequestBody UserForm userForm) {
+        log.debug("name:{}", userForm);
 
-    @Resource
-    private AddressDao addressDao;
-
-    @GetMapping("/")
-    @ApiOperation(value = "获取用户列表")
-    public List<User> getUserList() {
-        Page<User> page = new Page<>(5, 2000);
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        IPage<User> iPage = userDao.selectPage(page, queryWrapper);
-        System.out.println(JSONObject.toJSONString(iPage));
-        return iPage.getRecords();
+        return Result.success(userForm);
     }
+
+
 
 }

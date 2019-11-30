@@ -1,35 +1,49 @@
+#dataSources:
+#  order0: !!com.alibaba.druid.pool.DruidDataSource
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://hzajwj.cn:3307/order1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: 123456
+#  order1: !!com.alibaba.druid.pool.DruidDataSource
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://hzajwj.cn:3307/order2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: 123456
+#
+#shardingRule:
+#  tables:
+#    user:
+#      actualDataNodes: order${0..1}.user_${0..3}     # 表库分布图 order_0.user_0,order_0.user_1 >>> order_0.user_${0..1}
+#      databaseStrategy:                              # 分库逻辑 非必须
+#        inline:
+#          shardingColumn: id
+#          algorithmExpression: order${id % 2}
+#      tableStrategy:                                 # 分表逻辑
+#        standard:
+#          shardingColumn: id
+#          preciseAlgorithmClassName: com.zxk.core.config.ShardingSphere.HashPreciseShardingAlgorithm
+#      keyGenerator:                                  # 算法
+#        type: SNOWFLAKE
+#        column: id
+#  defaultDataSourceName: order0
+#  defaultKeyGenerator:
+#    type: SNOWFLAKE
+#    column: id
+#
+#props:
+#    sql.show: true
+#    max.connections.size.per.query: 8                # 查询线程数
+
 dataSources:
-  order0: !!com.alibaba.druid.pool.DruidDataSource
+  admin: !!com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://hzajwj.cn:3307/order1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    username: root
-    password: 123456
-  order1: !!com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://hzajwj.cn:3307/order2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://hzajwj.cn:3307/admin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
 
 shardingRule:
-  tables:
-    user:
-      actualDataNodes: order${0..1}.user_${0..3}     # 表库分布图 order_0.user_0,order_0.user_1 >>> order_0.user_${0..1}
-      databaseStrategy:                              # 分库逻辑 非必须
-        inline:
-          shardingColumn: id
-          algorithmExpression: order${id % 2}
-      tableStrategy:                                 # 分表逻辑
-        standard:
-          shardingColumn: id
-          preciseAlgorithmClassName: com.zxk.core.config.ShardingSphere.HashPreciseShardingAlgorithm
-      keyGenerator:                                  # 算法
-        type: SNOWFLAKE
-        column: id
-  defaultDataSourceName: order0
-  defaultKeyGenerator:
-    type: SNOWFLAKE
-    column: id
+  defaultDataSourceName: admin
 
 props:
-    sql.show: true
-    max.connections.size.per.query: 8                # 查询线程数
+  sql.show: true
+  max.connections.size.per.query: 2                # 查询线程数
