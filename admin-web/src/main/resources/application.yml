@@ -16,11 +16,6 @@ spring:
         max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
         max-idle: 10        # 连接池中的最大空闲连接
         min-idle: 5         # 连接池中的最小空闲连接
-rocketmq:
-  nameServer: 1231302618839455.mqrest.cn-shenzhen.aliyuncs.com
-  producer:
-    group: boot_producer_group
-
 
 swagger:
   enabled: true                                       #是否启用swagger，默认：true

@@ -10,8 +10,6 @@ import com.zxk.admin.biz.domain.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,9 +37,6 @@ public class UserController {
     @Resource
     private AddressDao addressDao;
 
-    @Autowired
-    private RocketMQTemplate rocketMQTemplate;
-
     @GetMapping("/")
     @ApiOperation(value = "获取用户列表")
     public List<User> getUserList() {
@@ -52,9 +47,4 @@ public class UserController {
         return iPage.getRecords();
     }
 
-    @GetMapping
-    @ApiOperation(value = "发送mq")
-    public void putMq() {
-        rocketMQTemplate.convertAndSend("test-topic-1", "Hello, World!");
-    }
 }
