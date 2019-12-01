@@ -21,9 +21,6 @@ public class UserForm {
     @ApiModelProperty(value = "用户名")
     private String username;
 
-    @ApiModelProperty(value = "用户姓名")
-    private String name;
-
     @ApiModelProperty(value = "手机号")
     private String mobile;
 

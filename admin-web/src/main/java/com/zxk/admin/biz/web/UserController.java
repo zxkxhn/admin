@@ -1,7 +1,7 @@
 package com.zxk.admin.biz.web;
 
 import com.zxk.admin.biz.form.UserForm;
-import com.zxk.core.util.Result;
+import com.zxk.core.common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
