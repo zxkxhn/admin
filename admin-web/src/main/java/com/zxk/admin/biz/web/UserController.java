@@ -1,11 +1,14 @@
 package com.zxk.admin.biz.web;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.zxk.admin.biz.ao.SysUserAo;
+import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.form.UserForm;
 import com.zxk.core.common.Result;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,25 +18,30 @@ import javax.validation.Valid;
 
 
 /**
- * TODO
+ * 系统用户管理
  *
  * @author xiaokun.zhang
  * Date:   2019年11月19日 16:24
  * @version 1.0
  */
 @Slf4j
-@Api(tags = "用户管理")
+@Api(tags = "系统用户管理")
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/SysUser")
 public class UserController {
 
+    @Autowired
+    private SysUserAo sysUserAo;
+
     @ApiOperation(value = "新增用户", notes = "新增一个用户")
-    @ApiImplicitParam(name = "userForm", value = "新增用户form表单", required = true, dataType = "UserForm")
     @PostMapping
     public Result add(@Valid @RequestBody UserForm userForm) {
-        log.debug("name:{}", userForm);
+        SysUser sysUser = new SysUser();
+        BeanUtil.copyProperties(userForm, sysUser);
 
-        return Result.success(userForm);
+        sysUserAo.addUser(sysUser);
+
+        return Result.success();
     }
 
 

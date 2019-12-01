@@ -7,8 +7,9 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 
+
 /**
- * TODO
+ * 用户表单
  *
  * @author zhangxk
  * @Email 980137428@qq.com
@@ -16,12 +17,15 @@ import javax.validation.constraints.NotBlank;
  */
 @ApiModel
 @Data
-public class UserForm {
+public class UserAddForm {
 
     @ApiModelProperty(value = "用户名")
+    @NotBlank(message = "用户名不能为空")
     private String username;
 
     @ApiModelProperty(value = "手机号")
+    @NotBlank(message = "手机号不能为空")
+
     private String mobile;
 
     @ApiModelProperty(value = "用户密码")
