@@ -1,49 +1,57 @@
 package com.zxk.admin.biz.web;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.zxk.admin.biz.ao.SysUserAo;
-import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.form.UserForm;
 import com.zxk.core.common.Result;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 /**
- * 系统用户管理
+ * TODO
  *
  * @author xiaokun.zhang
  * Date:   2019年11月19日 16:24
  * @version 1.0
  */
 @Slf4j
-@Api(tags = "系统用户管理")
+@Api(tags = "用户管理")
 @RestController
-@RequestMapping(value = "/SysUser")
+@RequestMapping(value = "/user")
 public class UserController {
 
+    private ExecutorService executors = Executors.newFixedThreadPool(5);
+
     @Autowired
-    private SysUserAo sysUserAo;
+    private RocketMQTemplate rocketMQTemplate;
 
     @ApiOperation(value = "新增用户", notes = "新增一个用户")
+    @ApiImplicitParam(name = "userForm", value = "新增用户form表单", required = true, dataType = "UserForm")
     @PostMapping
     public Result add(@Valid @RequestBody UserForm userForm) {
-        SysUser sysUser = new SysUser();
-        BeanUtil.copyProperties(userForm, sysUser);
+        log.debug("name:{}", userForm);
 
-        sysUserAo.addUser(sysUser);
-
-        return Result.success();
+        return Result.success(userForm);
     }
 
 
+
+    @GetMapping
+    public void put(){
+        for (int i = 0; i < 50000; i++) {
+            final int i1 = i;
+            executors.execute(() -> rocketMQTemplate.syncSend("test-topic-1", MessageBuilder.withPayload("Hello, World! I'm from spring message   num:" + i1).build()));
+        }
+
+    }
 
 }
