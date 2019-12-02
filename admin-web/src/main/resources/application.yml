@@ -17,6 +17,14 @@ spring:
         max-idle: 10        # 连接池中的最大空闲连接
         min-idle: 5         # 连接池中的最小空闲连接
 
+
+rocketmq:
+  name-server: 123.56.116.9:9876
+  producer:
+    group: boot_producer_group
+
+
+
 swagger:
   enabled: true                                       #是否启用swagger，默认：true
   title: 后台管理端                                    #标题
