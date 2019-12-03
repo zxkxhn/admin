@@ -40,6 +40,19 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
+        <!--打包时 排除jar包里面的配置文件，后面会将配置文件打在jar同级的config目录下 -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>*.properties</exclude>
+                    <exclude>*.xml</exclude>
+                    <exclude>*.yml</exclude>
+                </excludes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>
