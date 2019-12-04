@@ -40,7 +40,7 @@ public class UserAddForm {
     private String email;
 
 
-    @ApiModelProperty(value = "状态")
+    @ApiModelProperty(value = "状态", example = "1")
     @NotBlank(message = "状态不能为空")
     private int status;
 }
