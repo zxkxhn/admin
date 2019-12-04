@@ -74,3 +74,6 @@ dubbo:
     address: zookeeper://hzajwj.cn:2181
   application:
     name: @artifactId@
+
+test:
+  abc: true
