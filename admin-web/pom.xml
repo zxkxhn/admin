@@ -11,7 +11,6 @@
     <modelVersion>4.0.0</modelVersion>
     <properties>
         <admin-client.version>1.0-SNAPSHOT</admin-client.version>
-        <com.zxk.core.version>1.0-SNAPSHOT</com.zxk.core.version>
     </properties>
 
     <groupId>admin-web</groupId>
@@ -29,7 +28,6 @@
         <dependency>
             <groupId>com.zxk</groupId>
             <artifactId>core</artifactId>
-            <version>${com.zxk.core.version}</version>
         </dependency>
 
         <!--JWT-->
