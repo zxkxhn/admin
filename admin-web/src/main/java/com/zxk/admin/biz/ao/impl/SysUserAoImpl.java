@@ -1,9 +1,14 @@
 package com.zxk.admin.biz.ao.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.dao.SysUserDao;
 import com.zxk.admin.biz.domain.SysUser;
-import com.zxk.admin.biz.enums.SysUserStatusEnum;
+import com.zxk.admin.biz.form.UserAddForm;
+import com.zxk.admin.biz.form.UserLoginForm;
+import com.zxk.admin.biz.form.UserRegisterForm;
+import com.zxk.core.common.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,15 +24,55 @@ import javax.annotation.Resource;
 @Service
 public class SysUserAoImpl implements SysUserAo {
 
-
     @Resource
     private SysUserDao sysUserDao;
 
+
+    @Override
+    public Result login(UserLoginForm userLoginForm) {
+        Result result = Result.fail();
+        QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda()
+                .eq(SysUser::getPassword, userLoginForm.getPassword())
+                .eq(SysUser::getUsername, userLoginForm.getUsername())
+        ;
+        int count = sysUserDao.selectCount(queryWrapper);
+        if(count == 1){
+            return Result.success("登陆成功");
+        }
+        return result;
+    }
+
+    @Override
+    public Result register(UserRegisterForm userRegisterForm) {
+        Result result = Result.fail();
+        SysUser sysUser = new SysUser();
+        BeanUtil.copyProperties(userRegisterForm, sysUser);
+        int i = sysUserDao.insert(sysUser);
+        if (i > 0) {
+            return Result.success("注册成功");
+        }
+        return result;
+    }
+
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void addUser(SysUser sysUser) {
-
-        sysUser.setStatus(SysUserStatusEnum.normal.getValue());
-        sysUserDao.insert(sysUser);
+    public Result addUser(UserAddForm userAddForm) {
+        Result result = Result.fail();
+        SysUser sysUser = new SysUser();
+        BeanUtil.copyProperties(userAddForm, sysUser);
+        int i = sysUserDao.insert(sysUser);
+        if (i > 0) {
+            return Result.success("添加成功");
+        }
+        return result;
     }
+
+    @Override
+    public Result selectList() {
+        return Result.success(sysUserDao.selectList(new QueryWrapper<>()));
+    }
+
+
 }

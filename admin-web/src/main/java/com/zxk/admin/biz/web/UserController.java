@@ -1,16 +1,17 @@
 package com.zxk.admin.biz.web;
 
+import com.zxk.admin.biz.ao.SysUserAo;
+import com.zxk.admin.biz.form.UserAddForm;
+import com.zxk.core.common.Result;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import javax.annotation.Resource;
 
 
 /**
@@ -26,21 +27,23 @@ import java.util.concurrent.Executors;
 @RequestMapping(value = "/user")
 public class UserController {
 
-    private ExecutorService executors = Executors.newFixedThreadPool(5);
-
-    @Autowired
-    private RocketMQTemplate rocketMQTemplate;
-
-
-
+    @Resource
+    private SysUserAo sysUserAo;
 
     @GetMapping
-    public void put(){
-        for (int i = 0; i < 50000; i++) {
-            final int i1 = i;
-            executors.execute(() -> rocketMQTemplate.syncSend("test-topic-1", MessageBuilder.withPayload("Hello, World! I'm from spring message   num:" + i1).build()));
-        }
-
+    @ApiOperation(value = "用户列表")
+    public Result selectList() {
+        return sysUserAo.selectList();
     }
+
+    @PostMapping
+    @ApiOperation(value = "添加用户")
+    public Result addUser(UserAddForm userAddForm) {
+        return sysUserAo.addUser(userAddForm);
+    }
+
+
+
+
 
 }

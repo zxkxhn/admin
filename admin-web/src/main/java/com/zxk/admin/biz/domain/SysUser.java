@@ -24,7 +24,7 @@ public class SysUser extends BaseDO {
     /**
      * 用户ID
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private long id;
 
     /**
