@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import java.util.Set;
 
 /**
- * TODO
+ * 权限实现类
  *
  * @author xiaokun.zhang
  * Date:   2019年12月05日 14:07
