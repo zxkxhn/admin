@@ -9,6 +9,7 @@ import com.zxk.admin.biz.form.UserAddForm;
 import com.zxk.admin.biz.form.UserLoginForm;
 import com.zxk.admin.biz.form.UserRegisterForm;
 import com.zxk.core.common.Result;
+import com.zxk.core.config.shiro.JwtUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,17 +31,18 @@ public class SysUserAoImpl implements SysUserAo {
 
     @Override
     public Result login(UserLoginForm userLoginForm) {
-        Result result = Result.fail();
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda()
                 .eq(SysUser::getPassword, userLoginForm.getPassword())
                 .eq(SysUser::getUsername, userLoginForm.getUsername())
         ;
-        int count = sysUserDao.selectCount(queryWrapper);
-        if(count == 1){
-            return Result.success("登陆成功");
+        SysUser sysUser = sysUserDao.selectOne(queryWrapper);
+        if(sysUser == null){
+            return Result.fail("登录失败，密码错误");
         }
-        return result;
+        SysUser obj = new SysUser();
+        BeanUtil.copyProperties(sysUser, obj, "password");
+        return Result.success(JwtUtil.sign(obj, sysUser.getPassword()));
     }
 
     @Override
