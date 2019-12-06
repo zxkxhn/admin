@@ -41,8 +41,8 @@ public class SysUserAoImpl implements SysUserAo {
             return Result.fail("登录失败，密码错误");
         }
         SysUser obj = new SysUser();
-        BeanUtil.copyProperties(sysUser, obj, "password");
-        return Result.success(JwtUtil.sign(obj, sysUser.getPassword()));
+        BeanUtil.copyProperties(sysUser, obj,"gmtModified");
+        return Result.success(JwtUtil.sign(obj, sysUser.getSalt()));
     }
 
     @Override
