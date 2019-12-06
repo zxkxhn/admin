@@ -1,4 +1,9 @@
-server.port: 8081
+server:
+  port: 8081
+  #jetty配置，主要是acceptors和selectors
+  jetty:
+    acceptors: 2  # acceptor线程数
+    selectors: 4  # selector线程数
 
 spring:
   application:
