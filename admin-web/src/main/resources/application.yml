@@ -58,8 +58,8 @@ dubbo:
   application:
     name: @artifactId@
 
-
-
+swagger:
+  enable: true
 
 
 
