@@ -6,9 +6,7 @@ import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.enums.SysUserStatusEnum;
 import com.zxk.core.config.shiro.JwtUtil;
 import com.zxk.core.config.shiro.ShiroAuth;
-import org.apache.shiro.authc.AccountException;
-import org.apache.shiro.authc.DisabledAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +43,7 @@ public class ShiroAuthImpl implements ShiroAuth {
         String token = o.toString();
         SysUser sysUser = (SysUser) JwtUtil.getUser(token, SysUser.class);
         if(sysUser == null){
-            throw new AccountException("token 解析失败");
+            throw new AuthenticationException("token 解析失败");
         }
         LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper
@@ -55,10 +53,13 @@ public class ShiroAuthImpl implements ShiroAuth {
         ;
         sysUser = sysUserDao.selectOne(queryWrapper);
         if (sysUser == null) {
-            throw new UnknownAccountException("未知账户");
+            throw new AuthenticationException("未知账户");
+        }
+        if (JwtUtil.verify(token, sysUser, sysUser.getPassword())) {
+            throw new AuthenticationException("TOKEN 失效");
         }
         if(sysUser.getStatus() == SysUserStatusEnum.Frozen.getValue()){
-            throw new DisabledAccountException("该账号已被冻结");
+            throw new AuthenticationException("该账号已被冻结");
         }
     }
 }
