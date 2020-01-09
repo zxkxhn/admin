@@ -35,19 +35,19 @@
         <finalName>${project.parent.artifactId}</finalName>
         <plugins>
             <!--Docker maven plugin-->
-<!--            <plugin>-->
-<!--                <groupId>com.spotify</groupId>-->
-<!--                <artifactId>dockerfile-maven-plugin</artifactId>-->
-<!--                <version>1.4.13</version>-->
-<!--                <configuration>-->
-<!--                    <repository>${project.artifactId}</repository>-->
-<!--                    <contextDirectory>./</contextDirectory>-->
-<!--                    <tag>${project.version}</tag>-->
-<!--                    <buildArgs>-->
-<!--                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>-->
-<!--                    </buildArgs>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>com.spotify</groupId>-->
+            <!--                <artifactId>dockerfile-maven-plugin</artifactId>-->
+            <!--                <version>1.4.13</version>-->
+            <!--                <configuration>-->
+            <!--                    <repository>${project.artifactId}</repository>-->
+            <!--                    <contextDirectory>./</contextDirectory>-->
+            <!--                    <tag>${project.version}</tag>-->
+            <!--                    <buildArgs>-->
+            <!--                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>-->
+            <!--                    </buildArgs>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
 
             <!--打包jar-->
             <plugin>
@@ -61,9 +61,9 @@
                     </excludes>
                     <archive>
                         <manifest>
-<!--                            <addClasspath>true</addClasspath>-->
+                            <!--                            <addClasspath>true</addClasspath>-->
                             <!--MANIFEST.MF 中 Class-Path 加入前缀-->
-<!--                            <classpathPrefix>lib/</classpathPrefix>-->
+                            <!--                            <classpathPrefix>lib/</classpathPrefix>-->
                             <!--jar包不包含唯一版本标识-->
                             <useUniqueVersions>false</useUniqueVersions>
                             <!--指定入口类-->
@@ -79,24 +79,24 @@
             </plugin>
 
             <!--拷贝依赖 copy-dependencies-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-dependency-plugin</artifactId>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>copy-dependencies</id>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>copy-dependencies</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <outputDirectory>-->
-<!--                                ${project.build.directory}/lib/-->
-<!--                            </outputDirectory>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-dependency-plugin</artifactId>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>copy-dependencies</id>-->
+            <!--                        <phase>package</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>copy-dependencies</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <outputDirectory>-->
+            <!--                                ${project.build.directory}/lib/-->
+            <!--                            </outputDirectory>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
 
             <!--拷贝资源文件 copy-resources-->
             <plugin>
@@ -126,12 +126,12 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <!--重写包含依赖，包含不存在的依赖，jar里没有pom里的依赖-->
-<!--                    <includes>-->
-<!--                        <include>-->
-<!--                            <groupId>null</groupId>-->
-<!--                            <artifactId>null</artifactId>-->
-<!--                        </include>-->
-<!--                    </includes>-->
+                    <!--                    <includes>-->
+                    <!--                        <include>-->
+                    <!--                            <groupId>null</groupId>-->
+                    <!--                            <artifactId>null</artifactId>-->
+                    <!--                        </include>-->
+                    <!--                    </includes>-->
                     <layout>ZIP</layout>
                     <!--使用外部配置文件，jar包里没有资源文件-->
                     <addResources>true</addResources>
