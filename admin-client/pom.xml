@@ -8,6 +8,7 @@
         <groupId>com.zxk</groupId>
         <artifactId>admin</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>admin-client</groupId>
