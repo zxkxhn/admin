@@ -31,18 +31,21 @@ public class SysUserAoImpl implements SysUserAo {
 
     @Override
     public Result login(UserLoginForm userLoginForm) {
-        QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda()
-                .eq(SysUser::getPassword, userLoginForm.getPassword())
-                .eq(SysUser::getUsername, userLoginForm.getUsername())
-        ;
-        SysUser sysUser = sysUserDao.selectOne(queryWrapper);
-        if(sysUser == null){
-            return Result.fail("登录失败，密码错误");
-        }
-        SysUser obj = new SysUser();
-        BeanUtil.copyProperties(sysUser, obj,"gmtModified");
-        return Result.success(JwtUtil.sign(obj, sysUser.getSalt()));
+//        QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.lambda()
+//                .eq(SysUser::getPassword, userLoginForm.getPassword())
+//                .eq(SysUser::getUsername, userLoginForm.getUsername())
+//        ;
+//        SysUser sysUser = sysUserDao.selectOne(queryWrapper);
+//        if(sysUser == null){
+//            return Result.fail("登录失败，密码错误");
+//        }
+        SysUser sysUser = new SysUser();
+        sysUser.setUsername("root");
+        sysUser.setPassword("root");
+        sysUser.setSalt("root");
+        BeanUtil.copyProperties(sysUser, sysUser,"gmtModified");
+        return Result.success(JwtUtil.sign(sysUser, sysUser.getSalt()));
     }
 
     @Override

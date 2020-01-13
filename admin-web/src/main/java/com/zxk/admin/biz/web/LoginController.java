@@ -41,8 +41,14 @@ public class LoginController {
     }
 
     @GetMapping("/test")
-    @ApiOperation(value = "测试")
+    @ApiOperation(value = "测试无登录")
     public Result test(UserLoginForm userLoginForm) {
+        return Result.success();
+    }
+
+    @GetMapping("/test1")
+    @ApiOperation(value = "测试登录")
+    public Result test1(UserLoginForm userLoginForm) {
         return Result.success();
     }
 
