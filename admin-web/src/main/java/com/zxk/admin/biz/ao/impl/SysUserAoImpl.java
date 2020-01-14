@@ -9,7 +9,7 @@ import com.zxk.admin.biz.form.UserAddForm;
 import com.zxk.admin.biz.form.UserLoginForm;
 import com.zxk.admin.biz.form.UserRegisterForm;
 import com.zxk.core.common.Result;
-import com.zxk.core.config.shiro.JwtUtil;
+import com.zxk.core.config.shiro.jwt.JwtUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,7 +45,7 @@ public class SysUserAoImpl implements SysUserAo {
         sysUser.setPassword("root");
         sysUser.setSalt("root");
         BeanUtil.copyProperties(sysUser, sysUser,"gmtModified");
-        return Result.success(JwtUtil.sign(sysUser, sysUser.getSalt()));
+        return Result.success(JwtUtil.sign(sysUser.getUsername(), sysUser.getSalt()));
     }
 
     @Override
