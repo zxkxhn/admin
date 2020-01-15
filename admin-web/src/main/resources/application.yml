@@ -69,7 +69,7 @@ swagger:
   enable: true
 
 shiro:
-  enable: true
+  enable: false
   # AES密码加密私钥(Base64加密)
   encryptAesKey: V2FuZzkyNjQ1NGRTQkFQSUpXVA==
   # JWT认证加密私钥(Base64加密)
