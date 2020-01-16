@@ -2,6 +2,7 @@ package com.zxk.admin.biz.config;
 
 import com.zxk.admin.biz.dao.SysUserDao;
 import com.zxk.core.config.shiro.ShiroAuth;
+import com.zxk.core.config.shiro.jwt.JwtUtil;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,10 @@ public class ShiroAuthImpl implements ShiroAuth {
     @Override
     public void checkLogin(Object o) {
         throw new AuthenticationException("token 解析失败");
+    }
+
+    @Override
+    public void RefreshToken(Object o) {
+
     }
 }
