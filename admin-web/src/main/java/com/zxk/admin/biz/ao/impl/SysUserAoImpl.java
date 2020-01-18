@@ -19,8 +19,8 @@ import javax.annotation.Resource;
  * 用户管理
  *
  * @author zhangxk
- * @Email 980137428@qq.com
- * Date:   2019年12月01日 11:40
+ * @Email  980137428@qq.com
+ * @Date:   2019年12月01日 11:40
  */
 @Service
 public class SysUserAoImpl implements SysUserAo {
