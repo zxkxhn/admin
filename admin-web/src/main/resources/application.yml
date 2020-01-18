@@ -9,7 +9,7 @@ server:
     # 每块buffer的空间大小,越小的空间被利用越充分
     buffer-size: 1024
     # 是否分配的直接内存
-    direct-buffers: true
+    direct-buffers: on
 
 spring:
   application:
@@ -47,9 +47,9 @@ mybatis-plus:
     banner: false
   #原生配置
   configuration:
-    map-underscore-to-camel-case: true
-    cache-enabled: true
-    call-setters-on-nulls: true
+    map-underscore-to-camel-case: on
+    cache-enabled: on
+    call-setters-on-nulls: on
     jdbc-type-for-null: 'null'
 
 

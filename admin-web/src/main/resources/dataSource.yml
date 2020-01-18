@@ -68,5 +68,5 @@ shardingRule:
         column: id
 
 props:
-  sql.show: true
-  max.connections.size.per.query: 8                # 查询线程数
+  sql.show: false
+  max.connections.size.per.query: 1                # 查询线程数
