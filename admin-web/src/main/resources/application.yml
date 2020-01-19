@@ -13,7 +13,7 @@ server:
 
 spring:
   application:
-    name: @parent.artifactId@
+    name: admin
   redis:
     host: 123.56.116.9
     port: 6379
@@ -63,7 +63,7 @@ dubbo:
   registry:
     address: nacos://123.56.116.9:8848
   application:
-    name: @artifactId@
+    name: ${spring.application.name}
 
 swagger:
   enable: true
