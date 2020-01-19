@@ -12,6 +12,7 @@ import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.dao.SysUserDao;
 import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.enums.SysUserStatusEnum;
+import com.zxk.admin.biz.exception.SysException;
 import com.zxk.admin.biz.form.SysUserAddForm;
 import com.zxk.admin.biz.form.SysUserLoginForm;
 import com.zxk.core.common.Result;
@@ -69,7 +70,7 @@ public class SysUserAoImpl implements SysUserAo {
                 .eq(SysUser::getMobile, sysUser.getMobile()));
 
         if (count > 0) {
-
+            throw new SysException("用户手机号重复!!");
         }
 
         // 随机key
