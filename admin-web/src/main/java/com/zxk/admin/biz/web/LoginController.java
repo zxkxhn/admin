@@ -33,16 +33,4 @@ public class LoginController {
         return sysUserAo.login(sysUserLoginForm);
     }
 
-    @GetMapping("/test")
-    @ApiOperation(value = "测试无登录")
-    public Result test(SysUserLoginForm sysUserLoginForm) {
-        return Result.success();
-    }
-
-    @GetMapping("/test1")
-    @ApiOperation(value = "测试登录")
-    public Result test1(SysUserLoginForm sysUserLoginForm) {
-        return Result.success();
-    }
-
 }
