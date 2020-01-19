@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 
 /**
@@ -18,7 +20,9 @@ import javax.validation.constraints.NotBlank;
  */
 @ApiModel
 @Data
-public class UserAddForm {
+public class UserAddForm implements Serializable {
+
+    private static final long serialVersionUID = -9066665058485853342L;
 
     @ApiModelProperty(value = "用户名")
     @NotBlank(message = "用户名不能为空")
@@ -41,6 +45,6 @@ public class UserAddForm {
 
 
     @ApiModelProperty(value = "状态", example = "1")
-    @NotBlank(message = "状态不能为空")
-    private int status;
+    @NotNull(message = "状态不能为空")
+    private Integer status;
 }

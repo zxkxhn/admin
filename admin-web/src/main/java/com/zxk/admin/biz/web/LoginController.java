@@ -34,12 +34,6 @@ public class LoginController {
         return sysUserAo.login(userLoginForm);
     }
 
-    @PostMapping("/register")
-    @ApiOperation(value = "注册")
-    public Result register(UserRegisterForm userRegisterForm) {
-        return sysUserAo.register(userRegisterForm);
-    }
-
     @GetMapping("/test")
     @ApiOperation(value = "测试无登录")
     public Result test(UserLoginForm userLoginForm) {

@@ -6,12 +6,10 @@ import com.zxk.core.common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 
 /**
@@ -30,20 +28,16 @@ public class UserController {
     @Resource
     private SysUserAo sysUserAo;
 
-    @GetMapping
+    @GetMapping("selectList")
     @ApiOperation(value = "用户列表")
     public Result selectList() {
         return sysUserAo.selectList();
     }
 
-    @PostMapping
+    @PostMapping("addUser")
     @ApiOperation(value = "添加用户")
-    public Result addUser(UserAddForm userAddForm) {
+    public Result addUser(@Valid @RequestBody UserAddForm userAddForm) {
         return sysUserAo.addUser(userAddForm);
     }
-
-
-
-
 
 }
