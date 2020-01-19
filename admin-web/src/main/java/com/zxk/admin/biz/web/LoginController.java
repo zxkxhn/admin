@@ -2,7 +2,6 @@ package com.zxk.admin.biz.web;
 
 import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.form.UserLoginForm;
-import com.zxk.admin.biz.form.UserRegisterForm;
 import com.zxk.core.common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

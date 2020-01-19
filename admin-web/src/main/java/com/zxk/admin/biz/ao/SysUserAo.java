@@ -1,10 +1,7 @@
 package com.zxk.admin.biz.ao;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.form.UserAddForm;
 import com.zxk.admin.biz.form.UserLoginForm;
-import com.zxk.admin.biz.form.UserRegisterForm;
 import com.zxk.core.common.Result;
 
 /**

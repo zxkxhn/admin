@@ -8,15 +8,12 @@ import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.dao.SysUserDao;
 import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.enums.SysUserStatusEnum;
 import com.zxk.admin.biz.form.UserAddForm;
 import com.zxk.admin.biz.form.UserLoginForm;
-import com.zxk.admin.biz.form.UserRegisterForm;
 import com.zxk.core.common.Result;
 import com.zxk.core.config.shiro.jwt.JwtUtil;
 import org.springframework.stereotype.Service;
@@ -41,7 +38,7 @@ public class SysUserAoImpl implements SysUserAo {
 
     @Override
     public Result login(UserLoginForm userLoginForm) {
-        SysUser sysUser = sysUserDao.selectOne(new QueryWrapper<SysUser>().lambda()
+        SysUser sysUser = sysUserDao.selectOne(new LambdaQueryWrapper<SysUser>()
                 .eq(SysUser::getUsername, userLoginForm.getUsername())
         );
         if (sysUser == null) {
@@ -67,6 +64,14 @@ public class SysUserAoImpl implements SysUserAo {
         Result result = Result.fail();
         SysUser sysUser = new SysUser();
         BeanUtil.copyProperties(userAddForm, sysUser);
+
+        int count = sysUserDao.selectCount(new LambdaQueryWrapper<SysUser>()
+                .eq(SysUser::getMobile, sysUser.getMobile()));
+
+        if (count > 0) {
+
+        }
+
         // 随机key
         SecretKey key = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue());
         //构建
