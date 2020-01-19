@@ -1,7 +1,7 @@
 package com.zxk.admin.biz.web;
 
 import com.zxk.admin.biz.ao.SysUserAo;
-import com.zxk.admin.biz.form.UserLoginForm;
+import com.zxk.admin.biz.form.SysUserLoginForm;
 import com.zxk.core.common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,19 +29,19 @@ public class LoginController {
 
     @PostMapping("/login")
     @ApiOperation(value = "登录")
-    public Result login(UserLoginForm userLoginForm) {
-        return sysUserAo.login(userLoginForm);
+    public Result login(SysUserLoginForm sysUserLoginForm) {
+        return sysUserAo.login(sysUserLoginForm);
     }
 
     @GetMapping("/test")
     @ApiOperation(value = "测试无登录")
-    public Result test(UserLoginForm userLoginForm) {
+    public Result test(SysUserLoginForm sysUserLoginForm) {
         return Result.success();
     }
 
     @GetMapping("/test1")
     @ApiOperation(value = "测试登录")
-    public Result test1(UserLoginForm userLoginForm) {
+    public Result test1(SysUserLoginForm sysUserLoginForm) {
         return Result.success();
     }
 

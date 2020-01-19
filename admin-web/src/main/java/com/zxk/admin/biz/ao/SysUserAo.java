@@ -1,7 +1,7 @@
 package com.zxk.admin.biz.ao;
 
-import com.zxk.admin.biz.form.UserAddForm;
-import com.zxk.admin.biz.form.UserLoginForm;
+import com.zxk.admin.biz.form.SysUserAddForm;
+import com.zxk.admin.biz.form.SysUserLoginForm;
 import com.zxk.core.common.Result;
 
 /**
@@ -16,14 +16,14 @@ public interface SysUserAo {
     /**
      * 登录
      */
-    Result login(UserLoginForm userLoginForm);
+    Result login(SysUserLoginForm sysUserLoginForm);
 
     /**
      * 创建用户
      *
-     * @param userAddForm
+     * @param sysUserAddForm
      */
-    Result addUser(UserAddForm userAddForm);
+    Result addUser(SysUserAddForm sysUserAddForm);
 
     /**
      * 列表

@@ -20,7 +20,7 @@ import java.io.Serializable;
  */
 @ApiModel
 @Data
-public class UserAddForm implements Serializable {
+public class SysUserAddForm implements Serializable {
 
     private static final long serialVersionUID = -9066665058485853342L;
 

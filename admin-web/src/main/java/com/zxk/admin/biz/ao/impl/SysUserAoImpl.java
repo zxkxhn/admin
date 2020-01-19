@@ -12,8 +12,8 @@ import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.dao.SysUserDao;
 import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.enums.SysUserStatusEnum;
-import com.zxk.admin.biz.form.UserAddForm;
-import com.zxk.admin.biz.form.UserLoginForm;
+import com.zxk.admin.biz.form.SysUserAddForm;
+import com.zxk.admin.biz.form.SysUserLoginForm;
 import com.zxk.core.common.Result;
 import com.zxk.core.config.shiro.jwt.JwtUtil;
 import org.springframework.stereotype.Service;
@@ -37,9 +37,9 @@ public class SysUserAoImpl implements SysUserAo {
 
 
     @Override
-    public Result login(UserLoginForm userLoginForm) {
+    public Result login(SysUserLoginForm sysUserLoginForm) {
         SysUser sysUser = sysUserDao.selectOne(new LambdaQueryWrapper<SysUser>()
-                .eq(SysUser::getUsername, userLoginForm.getUsername())
+                .eq(SysUser::getUsername, sysUserLoginForm.getUsername())
         );
         if (sysUser == null) {
             return Result.fail("登录失败,账号不存在");
@@ -50,7 +50,7 @@ public class SysUserAoImpl implements SysUserAo {
         SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, key);
 
         //解密为字符串
-        String passwordForm = aes.encryptHex(userLoginForm.getPassword(), CharsetUtil.CHARSET_UTF_8);
+        String passwordForm = aes.encryptHex(sysUserLoginForm.getPassword(), CharsetUtil.CHARSET_UTF_8);
         if (!sysUser.getPassword().equals(passwordForm)) {
             return Result.fail("登录失败,账号密码错误");
         }
@@ -60,10 +60,10 @@ public class SysUserAoImpl implements SysUserAo {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Result addUser(UserAddForm userAddForm) {
+    public Result addUser(SysUserAddForm sysUserAddForm) {
         Result result = Result.fail();
         SysUser sysUser = new SysUser();
-        BeanUtil.copyProperties(userAddForm, sysUser);
+        BeanUtil.copyProperties(sysUserAddForm, sysUser);
 
         int count = sysUserDao.selectCount(new LambdaQueryWrapper<SysUser>()
                 .eq(SysUser::getMobile, sysUser.getMobile()));

@@ -1,7 +1,7 @@
 package com.zxk.admin.biz.web;
 
 import com.zxk.admin.biz.ao.SysUserAo;
-import com.zxk.admin.biz.form.UserAddForm;
+import com.zxk.admin.biz.form.SysUserAddForm;
 import com.zxk.core.common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,8 +36,8 @@ public class UserController {
 
     @PostMapping("addUser")
     @ApiOperation(value = "添加用户")
-    public Result addUser(@Valid @RequestBody UserAddForm userAddForm) {
-        return sysUserAo.addUser(userAddForm);
+    public Result addUser(@Valid @RequestBody SysUserAddForm sysUserAddForm) {
+        return sysUserAo.addUser(sysUserAddForm);
     }
 
 }
