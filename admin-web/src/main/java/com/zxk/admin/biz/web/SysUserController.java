@@ -22,8 +22,8 @@ import javax.validation.Valid;
 @Slf4j
 @Api(tags = "用户管理")
 @RestController
-@RequestMapping(value = "/user")
-public class UserController {
+@RequestMapping(value = "/SysUser")
+public class SysUserController {
 
     @Resource
     private SysUserAo sysUserAo;

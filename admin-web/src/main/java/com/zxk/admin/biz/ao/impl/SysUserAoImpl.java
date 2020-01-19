@@ -67,6 +67,17 @@ public class SysUserAoImpl implements SysUserAo {
         BeanUtil.copyProperties(sysUserAddForm, sysUser);
 
         int count = sysUserDao.selectCount(new LambdaQueryWrapper<SysUser>()
+                .eq(SysUser::getUsername, sysUser.getUsername()));
+        if (count > 0) {
+            throw new SysException("用户名重复!!");
+        }
+        count = sysUserDao.selectCount(new LambdaQueryWrapper<SysUser>()
+                .eq(SysUser::getEmail, sysUser.getEmail()));
+
+        if (count > 0) {
+            throw new SysException("用户邮箱重复!!");
+        }
+        count = sysUserDao.selectCount(new LambdaQueryWrapper<SysUser>()
                 .eq(SysUser::getMobile, sysUser.getMobile()));
 
         if (count > 0) {
@@ -88,7 +99,7 @@ public class SysUserAoImpl implements SysUserAo {
 
         int i = sysUserDao.insert(sysUser);
         if (i > 0) {
-            return Result.success("添加成功");
+            return Result.success();
         }
         return result;
     }
