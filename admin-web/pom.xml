@@ -6,12 +6,11 @@
         <groupId>com.zxk</groupId>
         <artifactId>admin</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <properties>
-        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-
         <admin-client.version>1.0-SNAPSHOT</admin-client.version>
     </properties>
 

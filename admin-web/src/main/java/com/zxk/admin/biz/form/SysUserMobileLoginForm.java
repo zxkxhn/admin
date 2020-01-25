@@ -1,5 +1,6 @@
 package com.zxk.admin.biz.form;
 
+import com.zxk.core.util.validation.IsMobile;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,16 +16,20 @@ import javax.validation.constraints.NotBlank;
  * @version 1.0
  */
 @Data
-@ApiModel(description = "用户账号登录表单")
-public class SysUserLoginForm {
+@ApiModel(description = "用户手机登录表单")
+public class SysUserMobileLoginForm {
 
-    @ApiModelProperty(value = "用户名")
-    @NotBlank(message = "用户名不能为空")
-    private String username;
+    @ApiModelProperty(value = "手机号")
+    @IsMobile()
+    @NotBlank(message = "手机号不能为空")
+    private String mobile;
 
     @ApiModelProperty(value = "用户密码")
     @NotBlank(message = "用户密码不能为空")
     @Length(min = 5, max = 20, message = "密码长度在5到20个字符")
     private String password;
+
+
+
 
 }

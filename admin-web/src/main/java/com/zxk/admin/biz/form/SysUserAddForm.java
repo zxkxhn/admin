@@ -18,8 +18,8 @@ import java.io.Serializable;
  * @Email 980137428@qq.com
  * Date:   2019年11月30日 21:51
  */
-@ApiModel
 @Data
+@ApiModel(description = "添加用户表单")
 public class SysUserAddForm implements Serializable {
 
     private static final long serialVersionUID = -9066665058485853342L;
@@ -37,12 +37,10 @@ public class SysUserAddForm implements Serializable {
     @Length(min = 5, max = 20, message = "密码长度在5到20个字符")
     private String password;
 
-
     @ApiModelProperty(value = "邮箱")
     @NotBlank(message = "邮箱不能为空")
     @Email
     private String email;
-
 
     @ApiModelProperty(value = "状态", example = "1")
     @NotNull(message = "状态不能为空")

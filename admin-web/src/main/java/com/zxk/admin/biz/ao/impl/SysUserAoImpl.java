@@ -15,6 +15,7 @@ import com.zxk.admin.biz.enums.SysUserStatusEnum;
 import com.zxk.admin.biz.exception.SysException;
 import com.zxk.admin.biz.form.SysUserAddForm;
 import com.zxk.admin.biz.form.SysUserLoginForm;
+import com.zxk.admin.biz.form.SysUserMobileLoginForm;
 import com.zxk.core.common.Result;
 import com.zxk.core.config.shiro.jwt.JwtUtil;
 import org.springframework.stereotype.Service;
@@ -37,26 +38,43 @@ public class SysUserAoImpl implements SysUserAo {
     private SysUserDao sysUserDao;
 
 
+
+
     @Override
     public Result login(SysUserLoginForm sysUserLoginForm) {
         SysUser sysUser = sysUserDao.selectOne(new LambdaQueryWrapper<SysUser>()
                 .eq(SysUser::getUsername, sysUserLoginForm.getUsername())
         );
         if (sysUser == null) {
-            return Result.fail("登录失败,账号不存在");
+            return Result.fail("登录失败,用户不存在");
         }
+        if (checkPassword(sysUser.getSalt(), sysUser.getPassword(), sysUserLoginForm.getPassword())) {
+            return Result.fail("登陆失败,账号或密码错误");
+        }
+        return Result.success(JwtUtil.sign(sysUser.getUsername(), sysUser.getSalt()));
+    }
 
-        byte[] key = Base64.decode(sysUser.getSalt());
+    @Override
+    public Result login(SysUserMobileLoginForm sysUserMobileLoginForm) {
+        SysUser sysUser = sysUserDao.selectOne(new LambdaQueryWrapper<SysUser>()
+                .eq(SysUser::getUsername, sysUserMobileLoginForm.getMobile())
+        );
+        if (sysUser == null) {
+            return Result.fail("登录失败,用户不存在");
+        }
+        if (checkPassword(sysUser.getSalt(), sysUser.getPassword(), sysUserMobileLoginForm.getPassword())) {
+            return Result.fail("登陆失败,手机号或密码错误");
+        }
+        return Result.success(JwtUtil.sign(sysUser.getUsername(), sysUser.getSalt()));
+    }
+
+
+    private boolean checkPassword(String salt, String password, String passwordInput) {
+        byte[] key = Base64.decode(salt);
         //构建
         SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, key);
-
-        //解密为字符串
-        String passwordForm = aes.encryptHex(sysUserLoginForm.getPassword(), CharsetUtil.CHARSET_UTF_8);
-        if (!sysUser.getPassword().equals(passwordForm)) {
-            return Result.fail("登录失败,账号密码错误");
-        }
-        BeanUtil.copyProperties(sysUser, sysUser, "gmtModified");
-        return Result.success(JwtUtil.sign(sysUser.getUsername(), sysUser.getSalt()));
+        //解密字符串并校验
+        return password.equals(aes.encryptHex(passwordInput, CharsetUtil.CHARSET_UTF_8));
     }
 
     @Override

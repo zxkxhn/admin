@@ -2,6 +2,7 @@ package com.zxk.admin.biz.ao;
 
 import com.zxk.admin.biz.form.SysUserAddForm;
 import com.zxk.admin.biz.form.SysUserLoginForm;
+import com.zxk.admin.biz.form.SysUserMobileLoginForm;
 import com.zxk.core.common.Result;
 
 /**
@@ -17,6 +18,11 @@ public interface SysUserAo {
      * 登录
      */
     Result login(SysUserLoginForm sysUserLoginForm);
+
+    /**
+     * 登录
+     */
+    Result login(SysUserMobileLoginForm sysUserMobileLoginForm);
 
     /**
      * 创建用户
