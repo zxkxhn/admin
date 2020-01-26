@@ -1,8 +1,10 @@
 package com.zxk.admin.biz.ao;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.form.SysUserAddForm;
-import com.zxk.admin.biz.form.SysUserLoginForm;
-import com.zxk.admin.biz.form.SysUserMobileLoginForm;
+import com.zxk.admin.biz.form.login.SysUserAccountLoginForm;
+import com.zxk.admin.biz.form.login.SysUserMobileLoginForm;
 import com.zxk.core.common.Result;
 
 /**
@@ -16,24 +18,28 @@ public interface SysUserAo {
 
     /**
      * 登录
+     * @param sysUserAccountLoginForm 账号登陆表单
+     * @return 登录令牌
      */
-    Result login(SysUserLoginForm sysUserLoginForm);
+    Result<String> login(SysUserAccountLoginForm sysUserAccountLoginForm);
 
     /**
      * 登录
+     * @param sysUserMobileLoginForm 手机号登陆表单
+     * @return 登录令牌
      */
-    Result login(SysUserMobileLoginForm sysUserMobileLoginForm);
+    Result<String> login(SysUserMobileLoginForm sysUserMobileLoginForm);
+
 
     /**
      * 创建用户
-     *
-     * @param sysUserAddForm
+     * @param sysUserAddForm 添加用户表单
      */
-    Result addUser(SysUserAddForm sysUserAddForm);
+    Result<Void> addUser(SysUserAddForm sysUserAddForm);
 
     /**
      * 列表
      */
-    Result selectList();
+    Result<Page<SysUser>> selectList();
 
 }

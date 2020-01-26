@@ -1,10 +1,10 @@
-package com.zxk.admin.biz.form;
+package com.zxk.admin.biz.form.login;
 
 import com.zxk.core.util.validation.IsMobile;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
 
@@ -15,21 +15,13 @@ import javax.validation.constraints.NotBlank;
  * Date:   2019年12月04日 10:29
  * @version 1.0
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "用户手机登录表单")
-public class SysUserMobileLoginForm {
+public class SysUserMobileLoginForm extends SysUserLoginForm {
 
     @ApiModelProperty(value = "手机号")
     @IsMobile()
     @NotBlank(message = "手机号不能为空")
     private String mobile;
-
-    @ApiModelProperty(value = "用户密码")
-    @NotBlank(message = "用户密码不能为空")
-    @Length(min = 5, max = 20, message = "密码长度在5到20个字符")
-    private String password;
-
-
-
-
 }

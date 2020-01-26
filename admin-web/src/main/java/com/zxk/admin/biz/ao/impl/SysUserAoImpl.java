@@ -7,15 +7,15 @@ import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.dao.SysUserDao;
 import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.enums.SysUserStatusEnum;
 import com.zxk.admin.biz.exception.SysException;
 import com.zxk.admin.biz.form.SysUserAddForm;
-import com.zxk.admin.biz.form.SysUserLoginForm;
-import com.zxk.admin.biz.form.SysUserMobileLoginForm;
+import com.zxk.admin.biz.form.login.SysUserAccountLoginForm;
+import com.zxk.admin.biz.form.login.SysUserMobileLoginForm;
 import com.zxk.core.common.Result;
 import com.zxk.core.config.shiro.jwt.JwtUtil;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,7 @@ public class SysUserAoImpl implements SysUserAo {
 
 
     @Override
-    public Result login(SysUserLoginForm sysUserLoginForm) {
+    public Result<String> login(SysUserAccountLoginForm sysUserLoginForm) {
         SysUser sysUser = sysUserDao.selectOne(new LambdaQueryWrapper<SysUser>()
                 .eq(SysUser::getUsername, sysUserLoginForm.getUsername())
         );
@@ -55,7 +55,7 @@ public class SysUserAoImpl implements SysUserAo {
     }
 
     @Override
-    public Result login(SysUserMobileLoginForm sysUserMobileLoginForm) {
+    public Result<String> login(SysUserMobileLoginForm sysUserMobileLoginForm) {
         SysUser sysUser = sysUserDao.selectOne(new LambdaQueryWrapper<SysUser>()
                 .eq(SysUser::getUsername, sysUserMobileLoginForm.getMobile())
         );
@@ -79,8 +79,7 @@ public class SysUserAoImpl implements SysUserAo {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Result addUser(SysUserAddForm sysUserAddForm) {
-        Result result = Result.fail();
+    public Result<Void> addUser(SysUserAddForm sysUserAddForm) {
         SysUser sysUser = new SysUser();
         BeanUtil.copyProperties(sysUserAddForm, sysUser);
 
@@ -119,12 +118,12 @@ public class SysUserAoImpl implements SysUserAo {
         if (i > 0) {
             return Result.success();
         }
-        return result;
+        return Result.fail();
     }
 
     @Override
-    public Result selectList() {
-        return Result.success(sysUserDao.selectList(new QueryWrapper<>()));
+    public Result<Page<SysUser>> selectList() {
+        return Result.success();
     }
 
 
