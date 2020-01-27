@@ -19,7 +19,6 @@ import com.zxk.admin.biz.form.login.SysUserAccountLoginForm;
 import com.zxk.admin.biz.form.login.SysUserLoginForm;
 import com.zxk.admin.biz.form.login.SysUserMobileLoginForm;
 import com.zxk.core.common.Result;
-import com.zxk.core.config.shiro.jwt.JwtUtil;
 import com.zxk.core.util.RedisUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,7 +54,7 @@ public class SysUserAoImpl implements SysUserAo {
         if (checkPassword(sysUser.getSalt(), sysUser.getPassword(), sysUserLoginForm.getPassword())) {
             return Result.fail("登陆失败,账号或密码错误");
         }
-        return Result.success(JwtUtil.sign(sysUser.getUsername(), sysUser.getSalt()));
+        return Result.success("");
     }
 
     @Override
@@ -72,7 +71,7 @@ public class SysUserAoImpl implements SysUserAo {
         if (!checkPassword(sysUser.getSalt(), sysUser.getPassword(), sysUserMobileLoginForm.getPassword())) {
             return Result.fail("登陆失败,手机号或密码错误");
         }
-        return Result.success(JwtUtil.sign(sysUser.getUsername(), sysUser.getSalt()));
+        return Result.success("");
     }
 
 
