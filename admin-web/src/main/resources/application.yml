@@ -71,10 +71,10 @@ swagger:
 security:
   # 需要验证码校验的接口路径 支持通配符 自动过滤拦截校验 无需开发人员再次校验
   captcha:
-  # 图片验证码验证
-  image:
-    - /login # 登录接口
-    - /oauth2/authorize # 认证接口
+    # 图片验证码验证
+    image:
+      # 登录接口
+      - /login
     # 设置为true后，token将存入redis，并具有单点登录功能 默认false使用JWT交互
     redis: true
     # 是否开启单设备登陆 仅当token交互方式为redis时生效
@@ -95,6 +95,7 @@ security:
       - /swagger-ui.html
       - /swagger-resources/**
       - /swagger/**
+      - /doc.html
       - /**/v2/api-docs
       - /**/*.js
       - /**/*.css

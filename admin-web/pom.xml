@@ -34,7 +34,6 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-captcha</artifactId>
-            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
 
