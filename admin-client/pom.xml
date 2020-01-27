@@ -8,7 +8,7 @@
         <groupId>com.zxk</groupId>
         <artifactId>admin</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath/>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>admin-client</groupId>
@@ -16,14 +16,5 @@
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <!--    <distributionManagement>-->
-    <!--        <repository>-->
-    <!--            <id>rdc-releases</id>-->
-    <!--            <url>https://repo.rdc.aliyun.com/repository/110747-release-RBdR4x/</url>-->
-    <!--        </repository>-->
-    <!--        <snapshotRepository>-->
-    <!--            <id>rdc-snapshots</id>-->
-    <!--            <url>https://repo.rdc.aliyun.com/repository/110747-snapshot-WQvrDI/</url>-->
-    <!--        </snapshotRepository>-->
-    <!--    </distributionManagement>-->
+
 </project>

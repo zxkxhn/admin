@@ -75,9 +75,9 @@ shiro:
   # secretToken过期时间-5分钟-5*60(秒为单位)
   secretTokenExpireTime: 300
   filterMap:
-    -  '/captchaImage'
-    -  '/login'
-    -  '/login2'
+    - '/captchaImage'
+    - '/login'
+    - '/login2'
 
 
 

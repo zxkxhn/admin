@@ -9,15 +9,18 @@ import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zxk.admin.biz.ao.SysUserAo;
+import com.zxk.admin.biz.config.RedisConstant;
 import com.zxk.admin.biz.dao.SysUserDao;
 import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.enums.SysUserStatusEnum;
 import com.zxk.admin.biz.exception.SysException;
 import com.zxk.admin.biz.form.SysUserAddForm;
 import com.zxk.admin.biz.form.login.SysUserAccountLoginForm;
+import com.zxk.admin.biz.form.login.SysUserLoginForm;
 import com.zxk.admin.biz.form.login.SysUserMobileLoginForm;
 import com.zxk.core.common.Result;
 import com.zxk.core.config.shiro.jwt.JwtUtil;
+import com.zxk.core.util.RedisUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +31,8 @@ import javax.crypto.SecretKey;
  * 用户管理
  *
  * @author zhangxk
- * @Email 980137428@qq.com
- * @Date: 2019年12月01日 11:40
+ * @Email  980137428@qq.com
+ * @Date   2019年12月01日 11:40
  */
 @Service
 public class SysUserAoImpl implements SysUserAo {
@@ -38,10 +41,11 @@ public class SysUserAoImpl implements SysUserAo {
     private SysUserDao sysUserDao;
 
 
-
-
     @Override
     public Result<String> login(SysUserAccountLoginForm sysUserLoginForm) {
+        if (checkCaptchaCode(sysUserLoginForm)) {
+            return Result.fail("登录失败,验证码校验失败");
+        }
         SysUser sysUser = sysUserDao.selectOne(new LambdaQueryWrapper<SysUser>()
                 .eq(SysUser::getUsername, sysUserLoginForm.getUsername())
         );
@@ -56,19 +60,39 @@ public class SysUserAoImpl implements SysUserAo {
 
     @Override
     public Result<String> login(SysUserMobileLoginForm sysUserMobileLoginForm) {
+        if (checkCaptchaCode(sysUserMobileLoginForm)) {
+            return Result.fail("登录失败,验证码校验失败");
+        }
         SysUser sysUser = sysUserDao.selectOne(new LambdaQueryWrapper<SysUser>()
-                .eq(SysUser::getUsername, sysUserMobileLoginForm.getMobile())
+                .eq(SysUser::getMobile, sysUserMobileLoginForm.getMobile())
         );
         if (sysUser == null) {
             return Result.fail("登录失败,用户不存在");
         }
-        if (checkPassword(sysUser.getSalt(), sysUser.getPassword(), sysUserMobileLoginForm.getPassword())) {
+        if (!checkPassword(sysUser.getSalt(), sysUser.getPassword(), sysUserMobileLoginForm.getPassword())) {
             return Result.fail("登陆失败,手机号或密码错误");
         }
         return Result.success(JwtUtil.sign(sysUser.getUsername(), sysUser.getSalt()));
     }
 
 
+    /**
+     * 校验验证码
+     * @param sysUserLoginForm 通用表单
+     */
+    private boolean checkCaptchaCode(SysUserLoginForm sysUserLoginForm) {
+        if (!RedisUtils.getSingleton().hasKey(RedisConstant.CAPTCHA_IMAGE_ID + sysUserLoginForm.getCaptchaImageId())) {
+            return false;
+        }
+        return !RedisUtils.getSingleton().get(RedisConstant.CAPTCHA_IMAGE_ID + sysUserLoginForm.getCaptchaImageId()).equals(sysUserLoginForm.getCaptchaCode());
+    }
+
+    /**
+     * 校验密码
+     * @param salt 盐
+     * @param password 密码
+     * @param passwordInput 输入的密码
+     */
     private boolean checkPassword(String salt, String password, String passwordInput) {
         byte[] key = Base64.decode(salt);
         //构建

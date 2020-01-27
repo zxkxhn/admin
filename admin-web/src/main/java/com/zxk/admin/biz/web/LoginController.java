@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 登录模块
@@ -52,8 +53,8 @@ public class LoginController {
             lineCaptcha = CaptchaUtil.createLineCaptcha(width, height);
         }
         String base64 = lineCaptcha.getImageBase64();
-        RedisUtils.getSingleton().set(RedisConstant.CAPTCHA_IMAGE_ID + id, lineCaptcha.getCode());
-
+        // 加入redis 5 分钟过期
+        RedisUtils.getSingleton().setEx(RedisConstant.CAPTCHA_IMAGE_ID + id, lineCaptcha.getCode(),RedisConstant.CAPTCHA_IMAGE_EXPIRED, TimeUnit.MINUTES);
         CaptchaImageVO captchaImageVO = new CaptchaImageVO();
         captchaImageVO.setCaptchaImageId(id);
         captchaImageVO.setImageBase64(base64);
