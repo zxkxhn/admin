@@ -18,4 +18,7 @@ public class CaptchaImageVO {
     @ApiModelProperty(value = "验证码 base64 图片")
     private String imageBase64;
 
+    @ApiModelProperty(value = "验证码 code")
+    private String code;
+
 }

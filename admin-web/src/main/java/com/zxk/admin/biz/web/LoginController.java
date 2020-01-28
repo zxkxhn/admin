@@ -4,9 +4,6 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.util.IdUtil;
 import com.zxk.admin.biz.ao.SysUserAo;
-import com.zxk.admin.biz.config.RedisConstant;
-import com.zxk.admin.biz.form.login.SysUserAccountLoginForm;
-import com.zxk.admin.biz.form.login.SysUserMobileLoginForm;
 import com.zxk.admin.biz.vo.sysuserlogin.CaptchaImageVO;
 import com.zxk.core.common.Result;
 import com.zxk.core.util.RedisUtils;
@@ -15,13 +12,13 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.concurrent.TimeUnit;
+
+import static com.zxk.core.config.security.constant.SecurityConstant.LOGIN_CAPTCHA_ID;
 
 /**
  * 登录模块
@@ -31,7 +28,8 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  */
 @Slf4j
-@RestController
+@RestController()
+@RequestMapping(value = "/login")
 @Api(tags = "登录")
 public class LoginController {
 
@@ -54,23 +52,15 @@ public class LoginController {
         }
         String base64 = lineCaptcha.getImageBase64();
         // 加入redis 5 分钟过期
-        RedisUtils.getSingleton().setEx(RedisConstant.CAPTCHA_IMAGE_ID + id, lineCaptcha.getCode(),RedisConstant.CAPTCHA_IMAGE_EXPIRED, TimeUnit.MINUTES);
+        RedisUtils.getSingleton().setEx(LOGIN_CAPTCHA_ID + id, lineCaptcha.getCode(), 5, TimeUnit.MINUTES);
+
         CaptchaImageVO captchaImageVO = new CaptchaImageVO();
         captchaImageVO.setCaptchaImageId(id);
         captchaImageVO.setImageBase64(base64);
+        // todo 验证码暴露
+        if (log.isDebugEnabled()) {
+            captchaImageVO.setCode(lineCaptcha.getCode());
+        }
         return Result.success(captchaImageVO);
     }
-
-    @PostMapping("/login")
-    @ApiOperation(value = "账号登陆登录")
-    public Result<String> login(@RequestBody @Valid SysUserAccountLoginForm sysUserLoginForm) {
-        return sysUserAo.login(sysUserLoginForm);
-    }
-
-    @PostMapping("/login2")
-    @ApiOperation(value = "手机号登陆")
-    public Result<String> login(@RequestBody @Valid SysUserMobileLoginForm sysUserMobileLoginForm) {
-        return sysUserAo.login(sysUserMobileLoginForm);
-    }
-
 }

@@ -75,6 +75,7 @@ security:
     image:
       # 登录接口
       - /login
+  token:
     # 设置为true后，token将存入redis，并具有单点登录功能 默认false使用JWT交互
     redis: true
     # 是否开启单设备登陆 仅当token交互方式为redis时生效
@@ -91,6 +92,7 @@ security:
     loginAfterTime: 10
   ignored:
     urls:
+      - /login/captchaImage
       - /druid/**
       - /swagger-ui.html
       - /swagger-resources/**

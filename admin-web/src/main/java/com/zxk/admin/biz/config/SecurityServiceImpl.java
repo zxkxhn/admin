@@ -3,13 +3,15 @@ package com.zxk.admin.biz.config;
 import com.zxk.core.config.security.service.SecurityService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+@Service
 public class SecurityServiceImpl implements SecurityService {
     @Override
     public UserDetails getUserDetail(String username) {
-        new UserDetails() {
+        UserDetails userDetails = new UserDetails() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
                 return null;
@@ -27,7 +29,7 @@ public class SecurityServiceImpl implements SecurityService {
 
             @Override
             public boolean isAccountNonExpired() {
-                return false;
+                return true;
             }
 
             @Override
