@@ -13,7 +13,7 @@ import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.enums.SysUserStatusEnum;
 import com.zxk.admin.biz.exception.SysException;
 import com.zxk.admin.biz.form.SysUserAddForm;
-import com.zxk.admin.biz.vo.sysuser.SysUserVO;
+import com.zxk.admin.biz.vo.SysUserVO;
 import com.zxk.core.common.PageVO;
 import com.zxk.core.common.Result;
 import org.springframework.stereotype.Service;

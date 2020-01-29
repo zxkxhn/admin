@@ -1,7 +1,7 @@
 package com.zxk.admin.biz.ao;
 
 import com.zxk.admin.biz.form.SysUserAddForm;
-import com.zxk.admin.biz.vo.sysuser.SysUserVO;
+import com.zxk.admin.biz.vo.SysUserVO;
 import com.zxk.core.common.PageVO;
 import com.zxk.core.common.Result;
 

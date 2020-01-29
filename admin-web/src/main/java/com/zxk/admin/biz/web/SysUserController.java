@@ -3,7 +3,7 @@ package com.zxk.admin.biz.web;
 import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.form.SysUserAddForm;
 import com.zxk.admin.biz.query.SysUserQuery;
-import com.zxk.admin.biz.vo.sysuser.SysUserVO;
+import com.zxk.admin.biz.vo.SysUserVO;
 import com.zxk.core.common.PageVO;
 import com.zxk.core.common.Result;
 import io.swagger.annotations.Api;

@@ -1,4 +1,4 @@
-package com.zxk.admin.biz.vo.sysuser;
+package com.zxk.admin.biz.vo;
 
 import com.zxk.core.common.BaseVO;
 import io.swagger.annotations.ApiModel;

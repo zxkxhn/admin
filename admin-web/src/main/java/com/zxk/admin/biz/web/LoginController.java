@@ -4,7 +4,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.util.IdUtil;
 import com.zxk.admin.biz.ao.SysUserAo;
-import com.zxk.admin.biz.vo.syslogin.CaptchaImageVO;
+import com.zxk.admin.biz.vo.CaptchaImageVO;
 import com.zxk.core.common.Result;
 import com.zxk.core.util.RedisUtils;
 import io.swagger.annotations.Api;
