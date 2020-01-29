@@ -7,23 +7,20 @@ import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.dao.SysUserDao;
 import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.enums.SysUserStatusEnum;
 import com.zxk.admin.biz.exception.SysException;
 import com.zxk.admin.biz.form.SysUserAddForm;
-import com.zxk.admin.biz.form.login.SysUserLoginForm;
+import com.zxk.admin.biz.vo.sysuser.SysUserVO;
+import com.zxk.core.common.PageVO;
 import com.zxk.core.common.Result;
-import com.zxk.core.util.RedisUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.crypto.SecretKey;
-
-import static com.zxk.core.config.security.constant.SecurityConstant.LOGIN_CAPTCHA_ID;
 
 /**
  * 用户管理
@@ -37,31 +34,6 @@ public class SysUserAoImpl implements SysUserAo {
 
     @Resource
     private SysUserDao sysUserDao;
-
-    /**
-     * 校验验证码
-     * @param sysUserLoginForm 通用表单
-     */
-    private boolean checkCaptchaCode(SysUserLoginForm sysUserLoginForm) {
-        if (!RedisUtils.getSingleton().hasKey(LOGIN_CAPTCHA_ID + sysUserLoginForm.getCaptchaImageId())) {
-            return false;
-        }
-        return !RedisUtils.getSingleton().get(LOGIN_CAPTCHA_ID + sysUserLoginForm.getCaptchaImageId()).equals(sysUserLoginForm.getCaptchaCode());
-    }
-
-    /**
-     * 校验密码
-     * @param salt 盐
-     * @param password 密码
-     * @param passwordInput 输入的密码
-     */
-    private boolean checkPassword(String salt, String password, String passwordInput) {
-        byte[] key = Base64.decode(salt);
-        //构建
-        SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, key);
-        //解密字符串并校验
-        return password.equals(aes.encryptHex(passwordInput, CharsetUtil.CHARSET_UTF_8));
-    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -108,7 +80,7 @@ public class SysUserAoImpl implements SysUserAo {
     }
 
     @Override
-    public Result<Page<SysUser>> selectList() {
+    public Result<PageVO<SysUserVO>> selectList() {
         return Result.success();
     }
 

@@ -1,4 +1,4 @@
-package com.zxk.admin.biz.vo.sysuserlogin;
+package com.zxk.admin.biz.vo.syslogin;
 
 
 import io.swagger.annotations.ApiModel;

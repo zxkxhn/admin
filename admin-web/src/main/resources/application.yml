@@ -99,6 +99,7 @@ security:
       - /swagger/**
       - /doc.html
       - /**/v2/api-docs
+      - /**/v2/api-docs-ext
       - /**/*.js
       - /**/*.css
       - /**/*.png

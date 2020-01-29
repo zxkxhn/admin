@@ -4,7 +4,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.util.IdUtil;
 import com.zxk.admin.biz.ao.SysUserAo;
-import com.zxk.admin.biz.vo.sysuserlogin.CaptchaImageVO;
+import com.zxk.admin.biz.vo.syslogin.CaptchaImageVO;
 import com.zxk.core.common.Result;
 import com.zxk.core.util.RedisUtils;
 import io.swagger.annotations.Api;
@@ -39,8 +39,8 @@ public class LoginController {
     @GetMapping("/captchaImage")
     @ApiOperation(value = "验证码图片")
     public Result<CaptchaImageVO> captchaImage(
-            @ApiParam(name = "width", value = "验证码宽度") Integer width,
-            @ApiParam(name = "height", value = "验证码高度") Integer height
+            @ApiParam(name = "width", value = "验证码宽度", example = "300") Integer width,
+            @ApiParam(name = "height", value = "验证码高度", example = "100") Integer height
     ) {
         String id = IdUtil.fastSimpleUUID();
         LineCaptcha lineCaptcha;

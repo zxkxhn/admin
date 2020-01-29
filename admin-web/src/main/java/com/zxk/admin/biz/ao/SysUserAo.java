@@ -1,8 +1,8 @@
 package com.zxk.admin.biz.ao;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.form.SysUserAddForm;
+import com.zxk.admin.biz.vo.sysuser.SysUserVO;
+import com.zxk.core.common.PageVO;
 import com.zxk.core.common.Result;
 
 /**
@@ -23,6 +23,6 @@ public interface SysUserAo {
     /**
      * 列表
      */
-    Result<Page<SysUser>> selectList();
+    Result<PageVO<SysUserVO>> selectList();
 
 }
