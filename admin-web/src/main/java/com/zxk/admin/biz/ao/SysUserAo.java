@@ -1,6 +1,7 @@
 package com.zxk.admin.biz.ao;
 
 import com.zxk.admin.biz.form.SysUserAddForm;
+import com.zxk.admin.biz.query.SysUserQuery;
 import com.zxk.admin.biz.vo.SysUserVO;
 import com.zxk.core.common.PageVO;
 import com.zxk.core.common.Result;
@@ -23,6 +24,6 @@ public interface SysUserAo {
     /**
      * 列表
      */
-    Result<PageVO<SysUserVO>> selectList();
+    Result<PageVO<SysUserVO>> selectList(SysUserQuery sysUserQuery);
 
 }

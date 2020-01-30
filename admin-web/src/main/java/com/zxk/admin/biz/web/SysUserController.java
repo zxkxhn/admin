@@ -26,41 +26,42 @@ import javax.validation.Valid;
 @Slf4j
 @Api(tags = "用户管理")
 @RestController
-@RequestMapping(value = "/SysUser")
+@RequestMapping(value = "/sysUser")
 public class SysUserController {
 
     @Resource
     private SysUserAo sysUserAo;
 
-    @GetMapping("/page")
-    @ApiOperation(value = "用户列表")
-    public Result<PageVO<SysUserVO>> queryPage(SysUserQuery sysUserQuery) {
-        return sysUserAo.selectList();
-    }
 
-    @GetMapping("/{id}")
-    @ApiOperation(value = "用户")
-    public Result<SysUserVO> query(@PathVariable @ApiParam(name = "id", value = "用户ID", example = "1") long id) {
-        return Result.success();
-    }
-
-    @DeleteMapping("/{id}")
-    @ApiOperation(value = "删除用户")
-    public Result<Void> delete(@PathVariable @ApiParam(name = "id", value = "用户ID", example = "1") long id) {
-        return Result.success();
-    }
-
-    @PostMapping("add")
+    @PostMapping("/add")
     @ApiOperation(value = "添加用户")
     public Result<Void> add(@Valid @RequestBody SysUserAddForm sysUserAddForm) {
         return sysUserAo.addUser(sysUserAddForm);
     }
 
-    @PatchMapping("/{id}")
+    @PostMapping("/del")
+    @ApiOperation(value = "删除用户")
+    public Result<Void> delete(@RequestBody @ApiParam(name = "id", value = "用户ID", example = "1") long id) {
+        return Result.success();
+    }
+
+    @PatchMapping("/edit")
     @ApiOperation(value = "修改用户")
-    public Result<Void> update(@PathVariable @ApiParam(name = "id", value = "用户ID", example = "1") long id,
-                               @Valid @RequestBody SysUserAddForm sysUserAddForm) {
+    public Result<Void> update(@Valid @RequestBody SysUserAddForm sysUserAddForm) {
         return sysUserAo.addUser(sysUserAddForm);
+    }
+
+    @GetMapping("/page")
+    @ApiOperation(value = "用户列表")
+    public Result<PageVO<SysUserVO>> queryPage(@RequestBody SysUserQuery sysUserQuery) {
+        return sysUserAo.selectList(sysUserQuery);
+    }
+
+
+    @GetMapping("/query")
+    @ApiOperation(value = "用户")
+    public Result<SysUserVO> query(@RequestBody @ApiParam(name = "id", value = "用户ID", example = "1") long id) {
+        return Result.success();
     }
 
 }

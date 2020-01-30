@@ -7,12 +7,15 @@ import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.dao.SysUserDao;
 import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.enums.SysUserStatusEnum;
 import com.zxk.admin.biz.exception.SysException;
 import com.zxk.admin.biz.form.SysUserAddForm;
+import com.zxk.admin.biz.query.SysUserQuery;
 import com.zxk.admin.biz.vo.SysUserVO;
 import com.zxk.core.common.PageVO;
 import com.zxk.core.common.Result;
@@ -21,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.crypto.SecretKey;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用户管理
@@ -80,8 +85,15 @@ public class SysUserAoImpl implements SysUserAo {
     }
 
     @Override
-    public Result<PageVO<SysUserVO>> selectList() {
-        return Result.success();
+    public Result<PageVO<SysUserVO>> selectList(SysUserQuery sysUserQuery) {
+        IPage<SysUser> page = sysUserDao.selectPage(sysUserQuery.page(), new QueryWrapper<>());
+        List<SysUserVO> list = new ArrayList<>();
+        page.getRecords().forEach(sysUser -> {
+            SysUserVO sysUserVO = new SysUserVO();
+            BeanUtil.copyProperties(sysUserVO, sysUser);
+            list.add(sysUserVO);
+        });
+        return Result.page(list,page);
     }
 
 
