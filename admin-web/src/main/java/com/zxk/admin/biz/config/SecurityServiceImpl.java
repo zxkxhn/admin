@@ -45,8 +45,8 @@ public class SecurityServiceImpl implements SecurityService {
         if (sysUser == null) {
             throw new UsernameNotFoundException("当前账号不存在!");
         }
-        return new UserDetails() {
 
+        return new UserDetails() {
             private static final long serialVersionUID = -7691160220825068752L;
 
             @Override
@@ -80,23 +80,34 @@ public class SecurityServiceImpl implements SecurityService {
             /**
              * 账户是否过期
              *
-             * @return
              */
             @Override
             public boolean isAccountNonExpired() {
                 return true;
             }
 
+            /**
+             * 是否禁用
+             *
+             */
             @Override
             public boolean isAccountNonLocked() {
                 return true;
             }
 
+            /**
+             * 密码是否过期
+             *
+             */
             @Override
             public boolean isCredentialsNonExpired() {
                 return true;
             }
 
+            /**
+             * 是否启用
+             *
+             */
             @Override
             public boolean isEnabled() {
                 return sysUser.getStatus() == 1;
