@@ -1,5 +1,6 @@
 package com.zxk.admin.biz.config;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.zxk.admin.biz.dao.*;
 import com.zxk.admin.biz.domain.SysMenu;
@@ -45,26 +46,13 @@ public class SecurityServiceImpl implements SecurityService {
         if (sysUser == null) {
             throw new UsernameNotFoundException("当前账号不存在!");
         }
-
         return new UserDetails() {
             private static final long serialVersionUID = -7691160220825068752L;
 
+
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
-                List<GrantedAuthority> authorityList = new ArrayList<>();
-
-                long id = sysUser.getId();
-                List<Long> roleIds = sysUserRoleDao.selectList(new LambdaQueryWrapper<SysUserRole>().eq(SysUserRole::getUserId, id))
-                        .stream().map(SysUserRole::getId).collect(Collectors.toList()
-                        );
-                List<Long> menuIds = sysRoleMenuDao.selectList(new LambdaQueryWrapper<SysRoleMenu>().in(SysRoleMenu::getRoleId, roleIds)).stream().map(SysRoleMenu::getMenuId).collect(Collectors.toList());
-                List<SysMenu> menuList = sysMenuDao.selectList(new LambdaQueryWrapper<SysMenu>().in(SysMenu::getId, menuIds));
-
-                menuList.forEach(sysMenu -> {
-                    String perms = sysMenu.getPerms();
-                    authorityList.add(new SimpleGrantedAuthority(perms));
-                });
-                return authorityList;
+                return getCurrUserPerms(username);
             }
 
             @Override
@@ -113,5 +101,32 @@ public class SecurityServiceImpl implements SecurityService {
                 return sysUser.getStatus() == 1;
             }
         };
+    }
+
+    @Override
+    public List<GrantedAuthority> getCurrUserPerms(String username) {
+        SysUser sysUser = sysUserDao.selectOne(new LambdaQueryWrapper<SysUser>()
+                .eq(SysUser::getUsername, username));
+        if (sysUser == null) {
+            throw new UsernameNotFoundException("当前账号不存在!");
+        }
+        List<GrantedAuthority> authorityList = new ArrayList<>();
+
+        long id = sysUser.getId();
+        List<Long> roleIds = sysUserRoleDao.selectList(new LambdaQueryWrapper<SysUserRole>().eq(SysUserRole::getUserId, id))
+                .stream().map(SysUserRole::getId).collect(Collectors.toList()
+                );
+        if (CollectionUtil.isEmpty(roleIds)) {
+            return new ArrayList<>();
+        }
+
+        List<Long> menuIds = sysRoleMenuDao.selectList(new LambdaQueryWrapper<SysRoleMenu>().in(SysRoleMenu::getRoleId, roleIds)).stream().map(SysRoleMenu::getMenuId).collect(Collectors.toList());
+        List<SysMenu> menuList = sysMenuDao.selectList(new LambdaQueryWrapper<SysMenu>().in(SysMenu::getId, menuIds));
+
+        menuList.forEach(sysMenu -> {
+            String perms = sysMenu.getPerms();
+            authorityList.add(new SimpleGrantedAuthority(perms));
+        });
+        return authorityList;
     }
 }

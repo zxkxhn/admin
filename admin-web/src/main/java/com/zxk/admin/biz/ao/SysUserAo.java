@@ -21,6 +21,14 @@ public interface SysUserAo {
      */
     Result<Void> addUser(SysUserAddForm sysUserAddForm);
 
+
+    /**
+     * 重置密码
+     * @param id
+     * @return 密码
+     */
+    Result<String> resetPass(long id);
+
     /**
      * 列表
      */

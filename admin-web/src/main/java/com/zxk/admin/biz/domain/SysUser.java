@@ -38,11 +38,6 @@ public class SysUser extends BaseDO {
     private String password;
 
     /**
-     * 盐
-     */
-    private String salt;
-
-    /**
      * 邮箱
      */
     private String email;

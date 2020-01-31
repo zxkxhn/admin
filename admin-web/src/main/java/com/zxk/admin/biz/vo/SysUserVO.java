@@ -39,6 +39,6 @@ public class SysUserVO extends BaseVO {
     /**
      * 状态  1：禁用   0：正常
      */
-    @ApiModelProperty(value = "用户状态 1,禁用;2,正常", example = "1")
+    @ApiModelProperty(value = "用户状态 0,正常;1,冻结", example = "1")
     private int status;
 }

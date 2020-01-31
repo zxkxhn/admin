@@ -45,7 +45,7 @@ public class SysUserController {
         return Result.success();
     }
 
-    @PatchMapping("/edit")
+    @PostMapping("/edit")
     @ApiOperation(value = "修改用户")
     public Result<Void> update(@Valid @RequestBody SysUserAddForm sysUserAddForm) {
         return sysUserAo.addUser(sysUserAddForm);
@@ -53,7 +53,7 @@ public class SysUserController {
 
     @GetMapping("/page")
     @ApiOperation(value = "用户列表")
-    public Result<PageVO<SysUserVO>> queryPage(@RequestBody SysUserQuery sysUserQuery) {
+    public Result<PageVO<SysUserVO>> queryPage(SysUserQuery sysUserQuery) {
         return sysUserAo.selectList(sysUserQuery);
     }
 
@@ -62,6 +62,13 @@ public class SysUserController {
     @ApiOperation(value = "用户")
     public Result<SysUserVO> query(@RequestBody @ApiParam(name = "id", value = "用户ID", example = "1") long id) {
         return Result.success();
+    }
+
+
+    @PostMapping(value = "/resetPass")
+    @ApiOperation(value = "重置密码")
+    public Result<String> resetPass(@RequestParam @ApiParam(name = "id", value = "用户ID", example = "1") long id) {
+        return sysUserAo.resetPass(id);
     }
 
 }
