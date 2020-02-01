@@ -7,7 +7,9 @@ import com.zxk.admin.biz.domain.SysMenu;
 import com.zxk.admin.biz.domain.SysRoleMenu;
 import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.domain.SysUserRole;
+import com.zxk.core.config.security.constant.SecurityConstant;
 import com.zxk.core.config.security.service.SecurityService;
+import com.zxk.core.util.RedisUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -128,5 +130,24 @@ public class SecurityServiceImpl implements SecurityService {
             authorityList.add(new SimpleGrantedAuthority(perms));
         });
         return authorityList;
+    }
+
+    @Override
+    public void clearUserToken(String username) {
+        SysUser sysUser = sysUserDao.selectOne(new LambdaQueryWrapper<SysUser>()
+                .eq(SysUser::getUsername, username));
+        if (sysUser == null) {
+            throw new UsernameNotFoundException("当前账号不存在!");
+        }
+
+        if (!RedisUtils.getSingleton().hasKey(SecurityConstant.USER_TOKEN + username)) {
+            return;
+        }
+        String token = (String) RedisUtils.getSingleton().get(SecurityConstant.USER_TOKEN + username);
+        if (!RedisUtils.getSingleton().hasKey(SecurityConstant.TOKEN_PRE + token)) {
+            return ;
+        }
+        RedisUtils.getSingleton().delete(SecurityConstant.USER_TOKEN + username);
+        RedisUtils.getSingleton().delete(SecurityConstant.TOKEN_PRE + token);
     }
 }

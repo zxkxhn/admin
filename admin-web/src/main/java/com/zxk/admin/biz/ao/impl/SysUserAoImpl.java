@@ -12,12 +12,13 @@ import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.enums.SysUserStatusEnum;
 import com.zxk.admin.biz.exception.SysException;
 import com.zxk.admin.biz.form.SysUserAddForm;
+import com.zxk.admin.biz.form.SysUserEditForm;
 import com.zxk.admin.biz.query.SysUserQuery;
 import com.zxk.admin.biz.vo.SysUserVO;
 import com.zxk.core.common.PageVO;
 import com.zxk.core.common.Result;
 import com.zxk.core.config.security.constant.SecurityConstant;
-import com.zxk.core.util.RedisUtils;
+import com.zxk.core.config.security.service.SecurityService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,9 +40,12 @@ public class SysUserAoImpl implements SysUserAo {
     @Resource
     private SysUserDao sysUserDao;
 
+    @Resource
+    private SecurityService securityService;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Result<Void> addUser(SysUserAddForm sysUserAddForm) {
+    public Result<Void> add(SysUserAddForm sysUserAddForm) {
         SysUser sysUser = new SysUser();
         BeanUtil.copyProperties(sysUserAddForm, sysUser);
 
@@ -63,17 +67,6 @@ public class SysUserAoImpl implements SysUserAo {
             throw new SysException("用户手机号重复!!");
         }
 
-//        // 随机key
-//        SecretKey key = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue());
-//        //构建
-//        SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, key.getEncoded());
-//
-//        //加密为16进制表示
-//        String encryptHex = aes.encryptHex(sysUser.getPassword());
-//        String base64Key = Base64.encode(key.getEncoded());
-
-//        sysUser.setPassword(encryptHex);
-//        sysUser.setSalt(base64Key);
         String encryptPass = new BCryptPasswordEncoder().encode(sysUser.getPassword());
         sysUser.setPassword(encryptPass);
         sysUser.setStatus(SysUserStatusEnum.normal.getValue());
@@ -86,12 +79,71 @@ public class SysUserAoImpl implements SysUserAo {
     }
 
     @Override
+    public Result<Void> del(long id) {
+        SysUser sysUser = sysUserDao.selectById(id);
+        if(sysUser == null || sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)){
+            throw new SysException("管理员账户禁止操作");
+        }
+
+        if (sysUserDao.deleteById(id) == 0) {
+            return Result.fail("删除失败");
+        }
+        return Result.success();
+    }
+
+    @Override
+    public Result<Void> update(SysUserEditForm sysUserEditForm) {
+        long id = sysUserEditForm.getId();
+        SysUser sysUser = sysUserDao.selectById(id);
+        if (sysUser == null) {
+            throw new SysException("未找到对应ID的用户,请重试!");
+        }
+        if(sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)){
+            throw new SysException("管理员账户禁止操作");
+        }
+        BeanUtil.copyProperties(sysUserEditForm, sysUser,"id");
+        sysUser.setGmtModified(DateUtil.date());
+        if (sysUserDao.updateById(sysUser) == 0) {
+            return Result.fail("修改失败!");
+        }
+        return Result.success();
+    }
+
+    @Override
+    public Result<Void> updatePassword(long id, String password, String newPassword) {
+        SysUser sysUser = sysUserDao.selectById(id);
+        if (sysUser == null) {
+            throw new SysException("未找到对应ID的用户,请重试!");
+        }
+        if(sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)){
+            throw new SysException("管理员账户禁止操作");
+        }
+        if (!new BCryptPasswordEncoder().matches(password, sysUser.getPassword())) {
+            return Result.fail("旧密码不正确");
+        }
+
+        String newEncryptPass = new BCryptPasswordEncoder().encode(newPassword);
+        sysUser.setPassword(newEncryptPass);
+        if(sysUserDao.updateById(sysUser) == 0){
+            return Result.fail("修改密码失败!");
+        }
+
+        securityService.clearUserToken(sysUser.getUsername());
+        return Result.success();
+    }
+
+    @Override
     @Transactional(rollbackFor = SysException.class)
     public Result<String> resetPass(long id) {
         SysUser sysUser = sysUserDao.selectById(id);
         if (sysUser == null) {
             throw new SysException("未找到对应ID的用户,请重试!");
         }
+
+        if(sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)){
+            throw new SysException("管理员账户禁止操作");
+        }
+
         //  创建6-12位随机密码
         String password = RandomUtil.randomString(RandomUtil.randomInt(6, 12));
         String encryptPass = new BCryptPasswordEncoder().encode(password);
@@ -105,22 +157,12 @@ public class SysUserAoImpl implements SysUserAo {
             throw new SysException("重置密码失败,请重试!");
         }
 
-        String username = editSysUser.getUsername();
-
-        if(!RedisUtils.getSingleton().hasKey(SecurityConstant.USER_TOKEN + username)){
-            return Result.success(password);
-        }
-        String token = (String) RedisUtils.getSingleton().get(SecurityConstant.USER_TOKEN + username);
-        if (!RedisUtils.getSingleton().hasKey(SecurityConstant.TOKEN_PRE + token)) {
-            return Result.success(password);
-        }
-        RedisUtils.getSingleton().delete(SecurityConstant.USER_TOKEN + username);
-        RedisUtils.getSingleton().delete(SecurityConstant.TOKEN_PRE + token);
+        securityService.clearUserToken(sysUser.getUsername());
         return Result.success(password);
     }
 
     @Override
-    public Result<PageVO<SysUserVO>> selectList(SysUserQuery sysUserQuery) {
+    public Result<PageVO<SysUserVO>> queryPage(SysUserQuery sysUserQuery) {
         IPage<SysUser> page = sysUserDao.selectPage(sysUserQuery.page(), new QueryWrapper<>());
         List<SysUserVO> list = new ArrayList<>();
         page.getRecords().forEach(sysUser -> {
@@ -131,8 +173,15 @@ public class SysUserAoImpl implements SysUserAo {
         return Result.page(list, page);
     }
 
-
-    public static void main(String[] args) {
-        System.out.println(new BCryptPasswordEncoder().encode("123456"));
+    @Override
+    public Result<SysUserVO> queryById(long id) {
+        SysUser sysUser = sysUserDao.selectById(id);
+        if(sysUser == null){
+            return Result.fail();
+        }
+        SysUserVO sysUserVO = new SysUserVO();
+        BeanUtil.copyProperties(sysUser, sysUserVO);
+        return Result.success(sysUserVO);
     }
+
 }

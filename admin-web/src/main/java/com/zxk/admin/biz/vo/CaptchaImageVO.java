@@ -5,13 +5,16 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author zxk
  */
 @Data
 @ApiModel(value = "验证码返回对象", description = "接口返回对象")
-public class CaptchaImageVO {
+public class CaptchaImageVO implements Serializable {
 
+    private static final long serialVersionUID = -5001674739388258997L;
     @ApiModelProperty(value = "验证码ID")
     private String captchaImageId;
 

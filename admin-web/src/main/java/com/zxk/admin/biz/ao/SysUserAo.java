@@ -1,6 +1,7 @@
 package com.zxk.admin.biz.ao;
 
 import com.zxk.admin.biz.form.SysUserAddForm;
+import com.zxk.admin.biz.form.SysUserEditForm;
 import com.zxk.admin.biz.query.SysUserQuery;
 import com.zxk.admin.biz.vo.SysUserVO;
 import com.zxk.core.common.PageVO;
@@ -19,12 +20,32 @@ public interface SysUserAo {
      * 创建用户
      * @param sysUserAddForm 添加用户表单
      */
-    Result<Void> addUser(SysUserAddForm sysUserAddForm);
+    Result<Void> add(SysUserAddForm sysUserAddForm);
+
+    /**
+     * 删除用户
+     * @param id 用户ID
+     */
+    Result<Void> del(long id);
+
+    /**
+     * 修改用户
+     *
+     * @param sysUserEditForm 用户ID
+     */
+    Result<Void> update(SysUserEditForm sysUserEditForm);
+
+    /**
+     * 修改密码
+     *
+     * @param id 用户ID
+     */
+    Result<Void> updatePassword(long id, String password, String newPassword);
 
 
     /**
      * 重置密码
-     * @param id
+     * @param id 用户ID
      * @return 密码
      */
     Result<String> resetPass(long id);
@@ -32,6 +53,15 @@ public interface SysUserAo {
     /**
      * 列表
      */
-    Result<PageVO<SysUserVO>> selectList(SysUserQuery sysUserQuery);
+    Result<PageVO<SysUserVO>> queryPage(SysUserQuery sysUserQuery);
+
+
+    /**
+     * 通过ID查询用户
+     * @param id 用户ID
+     * @return
+     */
+    Result<SysUserVO> queryById(long id);
+
 
 }

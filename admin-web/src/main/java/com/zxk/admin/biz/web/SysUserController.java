@@ -2,6 +2,7 @@ package com.zxk.admin.biz.web;
 
 import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.form.SysUserAddForm;
+import com.zxk.admin.biz.form.SysUserEditForm;
 import com.zxk.admin.biz.query.SysUserQuery;
 import com.zxk.admin.biz.vo.SysUserVO;
 import com.zxk.core.common.PageVO;
@@ -36,25 +37,25 @@ public class SysUserController {
     @PostMapping("/add")
     @ApiOperation(value = "添加用户")
     public Result<Void> add(@Valid @RequestBody SysUserAddForm sysUserAddForm) {
-        return sysUserAo.addUser(sysUserAddForm);
+        return sysUserAo.add(sysUserAddForm);
     }
 
     @PostMapping("/del")
     @ApiOperation(value = "删除用户")
     public Result<Void> delete(@RequestBody @ApiParam(name = "id", value = "用户ID", example = "1") long id) {
-        return Result.success();
+        return sysUserAo.del(id);
     }
 
     @PostMapping("/edit")
     @ApiOperation(value = "修改用户")
-    public Result<Void> update(@Valid @RequestBody SysUserAddForm sysUserAddForm) {
-        return sysUserAo.addUser(sysUserAddForm);
+    public Result<Void> update(@Valid @RequestBody SysUserEditForm sysUserEditForm) {
+        return sysUserAo.update(sysUserEditForm);
     }
 
     @GetMapping("/page")
     @ApiOperation(value = "用户列表")
     public Result<PageVO<SysUserVO>> queryPage(SysUserQuery sysUserQuery) {
-        return sysUserAo.selectList(sysUserQuery);
+        return sysUserAo.queryPage(sysUserQuery);
     }
 
 

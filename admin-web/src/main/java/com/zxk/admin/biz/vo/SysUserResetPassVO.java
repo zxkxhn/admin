@@ -15,9 +15,6 @@ public class SysUserResetPassVO {
     @ApiModelProperty(value = "是否重置成功")
     private boolean isReset = false;
 
-    @ApiModelProperty(value = "原因")
-    private String msg;
-
     @ApiModelProperty(value = "重置后密码")
     private String password;
 }

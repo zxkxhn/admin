@@ -28,7 +28,7 @@ import static com.zxk.core.config.security.constant.SecurityConstant.LOGIN_CAPTC
  * @version 1.0
  */
 @Slf4j
-@RestController()
+@RestController
 @RequestMapping(value = "/login")
 @Api(tags = "登录")
 public class LoginController {
