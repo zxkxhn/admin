@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @ApiModel(value = "用户列表返回对象", description = "用户接口返回对象")
-public class SysUserResetPassVO {
+public class SysUserResetPassVo {
 
     @ApiModelProperty(value = "用户ID", example = "1")
     private long sysUserId;

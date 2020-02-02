@@ -4,7 +4,7 @@ import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.form.SysUserAddForm;
 import com.zxk.admin.biz.form.SysUserEditForm;
 import com.zxk.admin.biz.query.SysUserQuery;
-import com.zxk.admin.biz.vo.SysUserVO;
+import com.zxk.admin.biz.vo.SysUserVo;
 import com.zxk.core.common.PageVO;
 import com.zxk.core.common.Result;
 import io.swagger.annotations.Api;
@@ -48,20 +48,20 @@ public class SysUserController {
 
     @PostMapping("/edit")
     @ApiOperation(value = "修改用户")
-    public Result<Void> update(@Valid @RequestBody SysUserEditForm sysUserEditForm) {
+    public Result<Void> edit(@Valid @RequestBody SysUserEditForm sysUserEditForm) {
         return sysUserAo.update(sysUserEditForm);
     }
 
     @GetMapping("/page")
     @ApiOperation(value = "用户列表")
-    public Result<PageVO<SysUserVO>> queryPage(SysUserQuery sysUserQuery) {
+    public Result<PageVO<SysUserVo>> queryPage(SysUserQuery sysUserQuery) {
         return sysUserAo.queryPage(sysUserQuery);
     }
 
 
     @GetMapping("/query")
     @ApiOperation(value = "用户")
-    public Result<SysUserVO> query(@RequestBody @ApiParam(name = "id", value = "用户ID", example = "1") long id) {
+    public Result<SysUserVo> query(@RequestBody @ApiParam(name = "id", value = "用户ID", example = "1") long id) {
         return Result.success();
     }
 
@@ -70,6 +70,16 @@ public class SysUserController {
     @ApiOperation(value = "重置密码")
     public Result<String> resetPass(@RequestParam @ApiParam(name = "id", value = "用户ID", example = "1") long id) {
         return sysUserAo.resetPass(id);
+    }
+
+    @PostMapping(value = "/updatePassword")
+    @ApiOperation(value = "重置密码")
+    public Result<Void> updatePassword(@RequestParam
+                                       @ApiParam(name = "id", value = "用户ID", example = "1") long id,
+                                       @ApiParam(name = "password", value = "密码") String password,
+                                       @ApiParam(name = "newPassword", value = "新密码") String newPassword
+    ) {
+        return sysUserAo.updatePassword(id, password, newPassword);
     }
 
 }

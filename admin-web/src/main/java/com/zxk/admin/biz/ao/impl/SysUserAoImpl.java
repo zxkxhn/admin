@@ -14,7 +14,7 @@ import com.zxk.admin.biz.exception.SysException;
 import com.zxk.admin.biz.form.SysUserAddForm;
 import com.zxk.admin.biz.form.SysUserEditForm;
 import com.zxk.admin.biz.query.SysUserQuery;
-import com.zxk.admin.biz.vo.SysUserVO;
+import com.zxk.admin.biz.vo.SysUserVo;
 import com.zxk.core.common.PageVO;
 import com.zxk.core.common.Result;
 import com.zxk.core.config.security.constant.SecurityConstant;
@@ -162,11 +162,11 @@ public class SysUserAoImpl implements SysUserAo {
     }
 
     @Override
-    public Result<PageVO<SysUserVO>> queryPage(SysUserQuery sysUserQuery) {
+    public Result<PageVO<SysUserVo>> queryPage(SysUserQuery sysUserQuery) {
         IPage<SysUser> page = sysUserDao.selectPage(sysUserQuery.page(), new QueryWrapper<>());
-        List<SysUserVO> list = new ArrayList<>();
+        List<SysUserVo> list = new ArrayList<>();
         page.getRecords().forEach(sysUser -> {
-            SysUserVO sysUserVO = new SysUserVO();
+            SysUserVo sysUserVO = new SysUserVo();
             BeanUtil.copyProperties(sysUser, sysUserVO);
             list.add(sysUserVO);
         });
@@ -174,12 +174,12 @@ public class SysUserAoImpl implements SysUserAo {
     }
 
     @Override
-    public Result<SysUserVO> queryById(long id) {
+    public Result<SysUserVo> queryById(long id) {
         SysUser sysUser = sysUserDao.selectById(id);
         if(sysUser == null){
             return Result.fail();
         }
-        SysUserVO sysUserVO = new SysUserVO();
+        SysUserVo sysUserVO = new SysUserVo();
         BeanUtil.copyProperties(sysUser, sysUserVO);
         return Result.success(sysUserVO);
     }

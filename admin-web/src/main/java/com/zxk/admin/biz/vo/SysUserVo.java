@@ -8,8 +8,8 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
-@ApiModel(value = "用户列表返回对象", description = "用户列表返回对象")
-public class SysUserVO extends BaseVO {
+@ApiModel(value = "用户列表返回", description = "系统用户")
+public class SysUserVo extends BaseVO {
 
     private static final long serialVersionUID = 5846712330152995264L;
     /**
