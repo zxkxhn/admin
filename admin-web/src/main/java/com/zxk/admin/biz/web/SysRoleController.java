@@ -1,7 +1,9 @@
 package com.zxk.admin.biz.web;
 
+import com.zxk.admin.biz.ao.SysRoleAo;
 import com.zxk.admin.biz.form.SysRoleAddForm;
-import com.zxk.admin.biz.form.SysUserEditForm;
+import com.zxk.admin.biz.form.SysRoleEditForm;
+import com.zxk.admin.biz.vo.SysRoleVo;
 import com.zxk.core.common.Result;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -10,12 +12,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
 @RequestMapping(value = "/SysRole")
 public class SysRoleController {
+
+    @Resource
+    private SysRoleAo sysRoleAo;
 
 
 
@@ -25,7 +32,7 @@ public class SysRoleController {
     @PostMapping("/add")
     @ApiOperation(value = "添加角色")
     Result<Void> add(@Valid @RequestBody SysRoleAddForm sysRoleAddForm) {
-        return Result.success();
+        return sysRoleAo.add(sysRoleAddForm);
     }
 
     /**
@@ -34,7 +41,7 @@ public class SysRoleController {
     @PostMapping("/del")
     @ApiOperation(value = "删除角色")
     Result<Void> del(long id) {
-        return Result.success();
+        return sysRoleAo.del(id);
     }
 
     /**
@@ -42,8 +49,8 @@ public class SysRoleController {
      */
     @PostMapping("/edit")
     @ApiOperation(value = "编辑角色")
-    Result<Void> edit(@Valid @RequestBody SysUserEditForm sysUserEditForm) {
-        return Result.success();
+    Result<Void> edit(@Valid @RequestBody SysRoleEditForm sysRoleEditForm) {
+        return sysRoleAo.edit(sysRoleEditForm);
     }
 
 
@@ -52,16 +59,16 @@ public class SysRoleController {
      */
     @PostMapping("/list")
     @ApiOperation(value = "角色列表")
-    Result<Void> list() {
-        return Result.success();
+    Result<List<SysRoleVo>> list() {
+        return sysRoleAo.queryAll();
     }
 
     /**
      * 角色详情
      */
-    @PostMapping("/del")
+    @PostMapping("/detail")
     @ApiOperation(value = "角色详情")
-    Result<Void> query(long id) {
-        return Result.success();
+    Result<SysRoleVo> detail(long id) {
+        return sysRoleAo.queryById(id);
     }
 }
