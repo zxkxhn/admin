@@ -6,15 +6,14 @@
 
     <parent>
         <groupId>com.zxk</groupId>
-        <artifactId>admin</artifactId>
+        <artifactId>parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>admin-client</groupId>
     <artifactId>admin-client</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-
 
 </project>
