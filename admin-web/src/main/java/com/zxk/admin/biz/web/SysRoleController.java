@@ -4,7 +4,7 @@ import com.zxk.admin.biz.ao.SysRoleAo;
 import com.zxk.admin.biz.form.SysRoleAddForm;
 import com.zxk.admin.biz.form.SysRoleEditForm;
 import com.zxk.admin.biz.vo.SysRoleVo;
-import com.zxk.core.common.Result;
+import com.ss.core.common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

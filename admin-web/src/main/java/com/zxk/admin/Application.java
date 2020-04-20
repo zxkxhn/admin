@@ -1,7 +1,7 @@
 package com.zxk.admin;
 
 import cn.hutool.core.util.IdUtil;
-import com.zxk.core.frmawork.linklog.Constants;
+import com.ss.core.frmawork.linklog.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.boot.SpringApplication;

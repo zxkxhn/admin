@@ -1,7 +1,7 @@
 package com.zxk.admin.biz.query;
 
 import com.zxk.admin.biz.domain.SysUser;
-import com.zxk.core.common.BaseQuery;
+import com.ss.core.common.BaseQuery;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -9,7 +9,7 @@ import com.zxk.admin.biz.domain.SysRole;
 import com.zxk.admin.biz.form.SysRoleAddForm;
 import com.zxk.admin.biz.form.SysRoleEditForm;
 import com.zxk.admin.biz.vo.SysRoleVo;
-import com.zxk.core.common.Result;
+import com.ss.core.common.Result;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

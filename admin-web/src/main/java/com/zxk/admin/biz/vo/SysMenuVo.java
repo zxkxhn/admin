@@ -1,6 +1,6 @@
 package com.zxk.admin.biz.vo;
 
-import com.zxk.core.common.BaseVO;
+import com.ss.core.common.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

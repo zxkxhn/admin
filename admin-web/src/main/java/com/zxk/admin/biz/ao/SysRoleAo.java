@@ -3,7 +3,7 @@ package com.zxk.admin.biz.ao;
 import com.zxk.admin.biz.form.SysRoleAddForm;
 import com.zxk.admin.biz.form.SysRoleEditForm;
 import com.zxk.admin.biz.vo.SysRoleVo;
-import com.zxk.core.common.Result;
+import com.ss.core.common.Result;
 
 import java.util.List;
 

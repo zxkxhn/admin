@@ -3,7 +3,7 @@ package com.zxk.admin.biz.domain;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.zxk.core.common.BaseDO;
+import com.ss.core.common.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

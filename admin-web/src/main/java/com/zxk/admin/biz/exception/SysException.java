@@ -1,6 +1,6 @@
 package com.zxk.admin.biz.exception;
 
-import com.zxk.core.exception.CustomizeException;
+import com.ss.core.exception.CustomizeException;
 
 /**
  * Sys 异常处理

@@ -4,8 +4,8 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.util.IdUtil;
 import com.zxk.admin.biz.vo.CaptchaImageVo;
-import com.zxk.core.common.Result;
-import com.zxk.core.util.RedisUtils;
+import com.ss.core.common.Result;
+import com.ss.core.util.RedisUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.zxk.core.config.security.constant.SecurityConstant.LOGIN_CAPTCHA_ID;
+import static com.ss.core.config.security.constant.SecurityConstant.LOGIN_CAPTCHA_ID;
 
 /**
  * 登录模块

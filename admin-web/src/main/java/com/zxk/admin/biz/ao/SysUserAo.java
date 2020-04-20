@@ -4,8 +4,8 @@ import com.zxk.admin.biz.form.SysUserAddForm;
 import com.zxk.admin.biz.form.SysUserEditForm;
 import com.zxk.admin.biz.query.SysUserQuery;
 import com.zxk.admin.biz.vo.SysUserVo;
-import com.zxk.core.common.PageVO;
-import com.zxk.core.common.Result;
+import com.ss.core.common.PageVO;
+import com.ss.core.common.Result;
 
 /**
  * 用户管理AO

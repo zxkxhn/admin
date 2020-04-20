@@ -15,8 +15,8 @@ import com.zxk.admin.biz.form.SysMenuAddForm;
 import com.zxk.admin.biz.form.SysUserEditForm;
 import com.zxk.admin.biz.query.SysUserQuery;
 import com.zxk.admin.biz.vo.SysUserVo;
-import com.zxk.core.common.PageVO;
-import com.zxk.core.common.Result;
+import com.ss.core.common.PageVO;
+import com.ss.core.common.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
