@@ -4,8 +4,10 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.ss.core.common.PageVO;
+import com.ss.core.common.Result;
+import com.ss.core.config.security.constant.SecurityConstant;
+import com.ss.core.config.security.service.SecurityService;
 import com.zxk.admin.biz.ao.SysUserAo;
 import com.zxk.admin.biz.dao.SysUserDao;
 import com.zxk.admin.biz.domain.SysUser;
@@ -15,17 +17,11 @@ import com.zxk.admin.biz.form.SysUserAddForm;
 import com.zxk.admin.biz.form.SysUserEditForm;
 import com.zxk.admin.biz.query.SysUserQuery;
 import com.zxk.admin.biz.vo.SysUserVo;
-import com.ss.core.common.PageVO;
-import com.ss.core.common.Result;
-import com.ss.core.config.security.constant.SecurityConstant;
-import com.ss.core.config.security.service.SecurityService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 用户管理
@@ -163,14 +159,7 @@ public class SysUserAoImpl implements SysUserAo {
 
     @Override
     public Result<PageVO<SysUserVo>> queryPage(SysUserQuery sysUserQuery) {
-        IPage<SysUser> page = sysUserDao.selectPage(sysUserQuery.page(), new QueryWrapper<>());
-        List<SysUserVo> list = new ArrayList<>();
-        page.getRecords().forEach(sysUser -> {
-            SysUserVo sysUserVO = new SysUserVo();
-            BeanUtil.copyProperties(sysUser, sysUserVO);
-            list.add(sysUserVO);
-        });
-        return Result.page(list, page);
+        return null;
     }
 
     @Override
