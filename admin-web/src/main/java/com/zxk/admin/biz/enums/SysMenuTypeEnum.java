@@ -15,18 +15,7 @@ public enum SysMenuTypeEnum {
      */
     DIRECTORY(0, "目录"),
     MENU(1, "菜单"),
-    BUTTON(2, "按钮")
-
-
-    ;
-
-    private int value;
-    private String desc;
-
-    SysMenuTypeEnum(int value, String desc) {
-        this.value = value;
-        this.desc = desc;
-    }
+    BUTTON(2, "按钮");
 
     public static Map<Integer, SysMenuTypeEnum> map = new HashMap<>();
 
@@ -36,6 +25,13 @@ public enum SysMenuTypeEnum {
         }
     }
 
+    private int value;
+    private String desc;
+
+    SysMenuTypeEnum(int value, String desc) {
+        this.value = value;
+        this.desc = desc;
+    }
 
     public static SysMenuTypeEnum valueOf(int value) {
         return map.get(value);

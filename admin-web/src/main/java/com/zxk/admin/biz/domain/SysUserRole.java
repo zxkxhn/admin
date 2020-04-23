@@ -14,18 +14,18 @@ import java.io.Serializable;
 @Data
 @TableName("sys_user_role")
 public class SysUserRole implements Serializable {
-	private static final long serialVersionUID = 1L;
-	@TableId
-	private long id;
+    private static final long serialVersionUID = 1L;
+    @TableId
+    private long id;
 
-	/**
-	 * 用户ID
-	 */
-	private long userId;
+    /**
+     * 用户ID
+     */
+    private long userId;
 
-	/**
-	 * 角色ID
-	 */
-	private long roleId;
-	
+    /**
+     * 角色ID
+     */
+    private long roleId;
+
 }

@@ -145,7 +145,7 @@ public class SecurityServiceImpl implements SecurityService {
         }
         String token = (String) RedisUtils.getSingleton().get(SecurityConstant.USER_TOKEN + username);
         if (!RedisUtils.getSingleton().hasKey(SecurityConstant.TOKEN_PRE + token)) {
-            return ;
+            return;
         }
         RedisUtils.getSingleton().delete(SecurityConstant.USER_TOKEN + username);
         RedisUtils.getSingleton().delete(SecurityConstant.TOKEN_PRE + token);

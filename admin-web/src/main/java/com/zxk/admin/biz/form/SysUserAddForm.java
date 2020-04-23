@@ -19,7 +19,7 @@ import java.io.Serializable;
  * Date:   2019年11月30日 21:51
  */
 @Data
-@ApiModel(value = "添加用户表单" , discriminator = "SysUser")
+@ApiModel(value = "添加用户表单", discriminator = "SysUser")
 public class SysUserAddForm implements Serializable {
 
     private static final long serialVersionUID = -9066665058485853342L;

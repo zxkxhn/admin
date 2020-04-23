@@ -77,7 +77,7 @@ public class SysUserAoImpl implements SysUserAo {
     @Override
     public Result<Void> del(long id) {
         SysUser sysUser = sysUserDao.selectById(id);
-        if(sysUser == null || sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)){
+        if (sysUser == null || sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)) {
             throw new SysException("管理员账户禁止操作");
         }
 
@@ -94,10 +94,10 @@ public class SysUserAoImpl implements SysUserAo {
         if (sysUser == null) {
             throw new SysException("未找到对应ID的用户,请重试!");
         }
-        if(sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)){
+        if (sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)) {
             throw new SysException("管理员账户禁止操作");
         }
-        BeanUtil.copyProperties(sysUserEditForm, sysUser,"id");
+        BeanUtil.copyProperties(sysUserEditForm, sysUser, "id");
         sysUser.setGmtModified(DateUtil.date());
         if (sysUserDao.updateById(sysUser) == 0) {
             return Result.fail("修改失败!");
@@ -111,7 +111,7 @@ public class SysUserAoImpl implements SysUserAo {
         if (sysUser == null) {
             throw new SysException("未找到对应ID的用户,请重试!");
         }
-        if(sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)){
+        if (sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)) {
             throw new SysException("管理员账户禁止操作");
         }
         if (!new BCryptPasswordEncoder().matches(password, sysUser.getPassword())) {
@@ -120,7 +120,7 @@ public class SysUserAoImpl implements SysUserAo {
 
         String newEncryptPass = new BCryptPasswordEncoder().encode(newPassword);
         sysUser.setPassword(newEncryptPass);
-        if(sysUserDao.updateById(sysUser) == 0){
+        if (sysUserDao.updateById(sysUser) == 0) {
             return Result.fail("修改密码失败!");
         }
 
@@ -136,7 +136,7 @@ public class SysUserAoImpl implements SysUserAo {
             throw new SysException("未找到对应ID的用户,请重试!");
         }
 
-        if(sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)){
+        if (sysUser.getUsername().equals(SecurityConstant.LOGIN_ADMIN)) {
             throw new SysException("管理员账户禁止操作");
         }
 
@@ -165,7 +165,7 @@ public class SysUserAoImpl implements SysUserAo {
     @Override
     public Result<SysUserVo> queryById(long id) {
         SysUser sysUser = sysUserDao.selectById(id);
-        if(sysUser == null){
+        if (sysUser == null) {
             return Result.fail();
         }
         SysUserVo sysUserVO = new SysUserVo();

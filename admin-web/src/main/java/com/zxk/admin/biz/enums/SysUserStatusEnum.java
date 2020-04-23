@@ -9,7 +9,7 @@ import java.util.Map;
  * 用户状态
  *
  * @author zhangxk
- * @Email  980137428@qq.com
+ * @Email 980137428@qq.com
  * Date:   2019年12月01日 12:10
  */
 @Getter
@@ -26,14 +26,6 @@ public enum SysUserStatusEnum {
     ;
 
 
-    private int value;
-    private String desc;
-
-    SysUserStatusEnum(int value, String desc) {
-        this.value = value;
-        this.desc = desc;
-    }
-
     public static Map<Integer, SysUserStatusEnum> map = new HashMap<>();
 
     static {
@@ -42,6 +34,13 @@ public enum SysUserStatusEnum {
         }
     }
 
+    private int value;
+    private String desc;
+
+    SysUserStatusEnum(int value, String desc) {
+        this.value = value;
+        this.desc = desc;
+    }
 
     public static SysUserStatusEnum valueOf(int value) {
         return map.get(value);

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Data
-@ApiModel(value = "添加菜单" , discriminator = "SysMenu")
+@ApiModel(value = "添加菜单", discriminator = "SysMenu")
 public class SysMenuAddForm implements Serializable {
 
     private static final long serialVersionUID = 3237974578451583202L;

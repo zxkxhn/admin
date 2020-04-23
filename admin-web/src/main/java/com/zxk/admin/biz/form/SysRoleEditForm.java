@@ -8,16 +8,16 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Data
-@ApiModel(value = "添加用户角色" , discriminator = "SysRole")
+@ApiModel(value = "添加用户角色", discriminator = "SysRole")
 public class SysRoleEditForm implements Serializable {
 
     private static final long serialVersionUID = 6472685504431670364L;
 
-    @ApiModelProperty(value = "ID",example = "角色ID")
+    @ApiModelProperty(value = "ID", example = "角色ID")
     @NotBlank(message = "角色ID")
     private long id;
 
-    @ApiModelProperty(value = "角色名",example = "角色名以 ROLE_* 格式为例")
+    @ApiModelProperty(value = "角色名", example = "角色名以 ROLE_* 格式为例")
     @NotBlank(message = "角色名不能为空")
     private String name;
 

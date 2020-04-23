@@ -3,6 +3,8 @@ package com.zxk.admin.biz.ao.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.ss.core.common.PageVO;
+import com.ss.core.common.Result;
 import com.zxk.admin.biz.ao.SysMenuAo;
 import com.zxk.admin.biz.dao.SysMenuDao;
 import com.zxk.admin.biz.dao.SysRoleDao;
@@ -15,8 +17,6 @@ import com.zxk.admin.biz.form.SysMenuAddForm;
 import com.zxk.admin.biz.form.SysUserEditForm;
 import com.zxk.admin.biz.query.SysUserQuery;
 import com.zxk.admin.biz.vo.SysUserVo;
-import com.ss.core.common.PageVO;
-import com.ss.core.common.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,13 +39,12 @@ public class SysMenuAoImpl implements SysMenuAo {
     private SysRoleDao sysRoleDao;
 
 
-
     @Override
     public Result<Void> add(SysMenuAddForm sysMenuAddForm) {
         SysMenu sysMenu = new SysMenu();
         BeanUtil.copyProperties(sysMenuAddForm, sysMenu);
         int i = sysMenuDao.insert(sysMenu);
-        if(i <= 0){
+        if (i <= 0) {
             return Result.fail();
         }
         return Result.success();
@@ -55,7 +54,7 @@ public class SysMenuAoImpl implements SysMenuAo {
     @Override
     public Result<Void> del(long id) {
         SysMenu sysMenu = sysMenuDao.selectById(id);
-        if(sysMenu == null){
+        if (sysMenu == null) {
             Result.fail("该菜单ID不存在");
         }
         List<SysRoleMenu> sysRoleMenuList = sysRoleMenuDao.selectList(new LambdaQueryWrapper<SysRoleMenu>().eq(SysRoleMenu::getMenuId, id));
@@ -83,7 +82,6 @@ public class SysMenuAoImpl implements SysMenuAo {
     public Result<SysUserVo> queryById(long id) {
         return null;
     }
-
 
 
 }

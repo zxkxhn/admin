@@ -3,13 +3,13 @@ package com.zxk.admin.biz.ao.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.ss.core.common.Result;
 import com.zxk.admin.biz.ao.SysRoleAo;
 import com.zxk.admin.biz.dao.SysRoleDao;
 import com.zxk.admin.biz.domain.SysRole;
 import com.zxk.admin.biz.form.SysRoleAddForm;
 import com.zxk.admin.biz.form.SysRoleEditForm;
 import com.zxk.admin.biz.vo.SysRoleVo;
-import com.ss.core.common.Result;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,9 +36,10 @@ public class SysRoleAoImpl implements SysRoleAo {
 
     @Override
     public Result<Void> del(long id) {
-        if(sysRoleDao.deleteById(id) <= 0){
+        if (sysRoleDao.deleteById(id) <= 0) {
             return Result.fail();
-        };
+        }
+        ;
         return Result.success();
     }
 
