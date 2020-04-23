@@ -3,6 +3,7 @@ package com.zxk.admin.biz.web;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.util.IdUtil;
+import com.ss.security.constant.SecurityConstant;
 import com.zxk.admin.biz.vo.CaptchaImageVo;
 import com.ss.core.common.Result;
 import com.ss.core.util.RedisUtils;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.TimeUnit;
-
-import static com.ss.core.config.security.constant.SecurityConstant.LOGIN_CAPTCHA_ID;
 
 /**
  * 登录模块
@@ -48,7 +47,7 @@ public class LoginController {
         }
         String base64 = lineCaptcha.getImageBase64();
         // 加入redis 5 分钟过期
-        RedisUtils.getSingleton().setEx(LOGIN_CAPTCHA_ID + id, lineCaptcha.getCode(), 5, TimeUnit.MINUTES);
+        RedisUtils.getSingleton().setEx(SecurityConstant.LOGIN_CAPTCHA_ID + id, lineCaptcha.getCode(), 5, TimeUnit.MINUTES);
 
         CaptchaImageVo captchaImageVO = new CaptchaImageVo();
         captchaImageVO.setCaptchaImageId(id);

@@ -2,14 +2,14 @@ package com.zxk.admin.biz.config;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.ss.core.util.RedisUtils;
+import com.ss.security.constant.SecurityConstant;
+import com.ss.security.service.SecurityService;
 import com.zxk.admin.biz.dao.*;
 import com.zxk.admin.biz.domain.SysMenu;
 import com.zxk.admin.biz.domain.SysRoleMenu;
 import com.zxk.admin.biz.domain.SysUser;
 import com.zxk.admin.biz.domain.SysUserRole;
-import com.ss.core.config.security.constant.SecurityConstant;
-import com.ss.core.config.security.service.SecurityService;
-import com.ss.core.util.RedisUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

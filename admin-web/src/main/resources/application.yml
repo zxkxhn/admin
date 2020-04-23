@@ -52,6 +52,7 @@ mybatis-plus:
     jdbc-type-for-null: 'null'
 
 
+
 dubbo:
   scan:
     base-packages: com.zxk.admin.biz.service

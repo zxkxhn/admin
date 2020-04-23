@@ -1,13 +1,14 @@
 package com.zxk.admin;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 @Slf4j
-@SpringBootApplication
-@ComponentScan(basePackages = {"com.zxk.*","com.ss.*"})
+@SpringBootApplication(scanBasePackages = {"com.zxk.*","com.ss.*"})
+// 添加dao层扫描
+@MapperScan("com.zxk.admin.biz.dao")
 public class Application{
 
 	public static void main(String[] args) {
