@@ -109,14 +109,14 @@ security:
       - /**/*.ico
 ss:
   datasource:
-
-    druid:
+    admin:
       username: root
       password: 123456
       url: jdbc:mysql://123.56.116.9:3306/admin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-      name: aaa
-      stat-view-servlet:
-        reset-enable:
+  druid: 连接池
+  shardingsphere: 分库分表
+
+
 
 
 
