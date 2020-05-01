@@ -109,12 +109,16 @@ security:
       - /**/*.ico
 ss:
   datasource:
+    names: admin
     admin:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://123.56.116.9:3306/admin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: 123456
-      url: jdbc:mysql://123.56.116.9:3306/admin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-  druid: 连接池
-  shardingsphere: 分库分表
+
+
+
 
 
 
