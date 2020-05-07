@@ -116,6 +116,18 @@ ss:
       username: root
       password: 123456
   druid-cfg:
+    stat-view-servlet:
+      enabled: true
+  shard
+
+
+
+
+
+
+
+
+
 
 
 
