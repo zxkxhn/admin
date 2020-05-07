@@ -29,9 +29,6 @@ spring:
     nacos:
       discovery:
         server-addr: 123.56.116.9:8848
-  datasource:
-    dbcp2:
-      default-read-only:
 
 
 
@@ -112,13 +109,17 @@ security:
       - /**/*.ico
 ss:
   datasource:
-    names: admin
     admin:
       driverClassName: com.mysql.cj.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
       url: jdbc:mysql://123.56.116.9:3306/admin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: 123456
+  druid-cfg:
+
+
+
+
 
 
 
