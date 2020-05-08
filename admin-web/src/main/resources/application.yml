@@ -118,7 +118,6 @@ ss:
   druid-cfg:
     stat-view-servlet:
       enabled: true
-  shard
 
 
 
