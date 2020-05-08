@@ -41,10 +41,10 @@
         </dependency>
 
         <!-- 权限类 -->
-        <dependency>
-            <groupId>com.ss</groupId>
-            <artifactId>ss-security-oauth2</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.ss</groupId>-->
+<!--            <artifactId>ss-security-oauth2</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>cn.hutool</groupId>
