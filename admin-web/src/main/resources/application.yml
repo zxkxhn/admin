@@ -116,25 +116,24 @@ ss:
       url: jdbc:mysql://123.56.116.9:3306/admin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: 123456
+      druid-cfg:
+        max-active: 6
     test0:
       driverClassName: com.mysql.cj.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
       url: jdbc:mysql://123.56.116.9:3306/test0?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: 123456
+      druid-cfg:
+        max-active: 9
     test1:
       driverClassName: com.mysql.cj.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
       url: jdbc:mysql://123.56.116.9:3306/test1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: 123456
-  druid-cfg:
-    stat-view-servlet:
-      enabled: true
-      reset-enable: true
-      login-username: admin
-      login-password: 123456
-      allow: 127.0.0.1
+      druid-cfg:
+        max-active: 7
 
 
 
