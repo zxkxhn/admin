@@ -136,7 +136,7 @@ ss:
         max-active: 7
   druid:
     stat-view-servlet:
-      enabled: true
+
 
 
 
