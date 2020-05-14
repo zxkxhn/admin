@@ -136,7 +136,10 @@ ss:
         max-active: 7
   druid:
     stat-view-servlet:
-
+      enabled: true
+      loginUsername: admin1
+      loginPassword: 123456
+      resetEnable: true
 
 
 
