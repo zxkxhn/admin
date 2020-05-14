@@ -134,6 +134,9 @@ ss:
       password: 123456
       druid-cfg:
         max-active: 7
+  druid:
+    stat-view-servlet:
+      enabled: true
 
 
 
