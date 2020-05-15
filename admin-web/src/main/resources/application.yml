@@ -117,7 +117,22 @@ ss:
       username: root
       password: 123456
       druid-cfg:
+        initial-size: 1
         max-active: 6
+        min-idle: 2
+        max-wait: 3
+        pool-prepared-statements:
+        max-pool-prepared-statement-per-connection-size:
+        max-open-prepared-statements:
+        validation-query:
+        validation-query-timeout:
+        test-on-borrow:
+        test-on-return:
+        test-while-idle:
+        time-between-eviction-runs-millis:
+        min-evictable-idle-time-millis:
+        max-evictable-idle-time-millis:
+        filters: #配置多个英文逗号分隔
     test0:
       driverClassName: com.mysql.cj.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
