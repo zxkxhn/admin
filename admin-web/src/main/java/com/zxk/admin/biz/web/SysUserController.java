@@ -11,10 +11,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
 
 /**
@@ -36,7 +36,7 @@ public class SysUserController {
 
     @PostMapping("/add")
     @ApiOperation(value = "添加用户")
-    public Result<Void> add(@Valid @RequestBody SysUserAddForm sysUserAddForm) {
+    public Result<Void> add(@Validated @RequestBody SysUserAddForm sysUserAddForm) {
         return sysUserAo.add(sysUserAddForm);
     }
 
@@ -48,7 +48,7 @@ public class SysUserController {
 
     @PostMapping("/edit")
     @ApiOperation(value = "修改用户")
-    public Result<Void> edit(@Valid @RequestBody SysUserEditForm sysUserEditForm) {
+    public Result<Void> edit(@Validated @RequestBody SysUserEditForm sysUserEditForm) {
         return sysUserAo.update(sysUserEditForm);
     }
 
