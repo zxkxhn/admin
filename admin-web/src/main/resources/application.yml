@@ -69,9 +69,6 @@ dubbo:
 
 
 
-swagger:
-  enable: true
-
 security:
   # 需要验证码校验的接口路径 支持通配符 自动过滤拦截校验 无需开发人员再次校验
   captcha:
