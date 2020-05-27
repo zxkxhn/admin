@@ -14,8 +14,8 @@
         <admin-client.version>1.0.0-SNAPSHOT</admin-client.version>
     </properties>
 
-    <groupId>admin-web</groupId>
-    <artifactId>admin-web</artifactId>
+    <groupId>demo-web</groupId>
+    <artifactId>demo-web</artifactId>
     <packaging>jar</packaging>
 
 
@@ -28,38 +28,10 @@
             <version>${admin-client.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>demo-client</groupId>
-            <artifactId>demo-client</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-
         <!-- 核心包 -->
         <dependency>
             <groupId>com.ss</groupId>
             <artifactId>ss-core</artifactId>
-        </dependency>
-
-        <!-- 数据库 -->
-        <dependency>
-            <groupId>com.ss</groupId>
-            <artifactId>ss-databases</artifactId>
-        </dependency>
-
-        <!-- 权限类 -->
-<!--        <dependency>-->
-<!--            <groupId>com.ss</groupId>-->
-<!--            <artifactId>ss-security-oauth2</artifactId>-->
-<!--        </dependency>-->
-
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-http</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-captcha</artifactId>
         </dependency>
     </dependencies>
 

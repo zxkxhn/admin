@@ -1,0 +1,62 @@
+server:
+  port: 8082
+  undertow:
+    threads:
+      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+      io: 4
+      # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+      worker: 20
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 1024
+    # 是否分配的直接内存
+    direct-buffers: true
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: demo-web
+  redis:
+    host: 123.56.116.9
+    port: 6379
+    password: zxkxhnqwe123  # 密码（默认为空）
+    timeout: 6000ms         # 连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-active: 1000    # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10        # 连接池中的最大空闲连接
+        min-idle: 5         # 连接池中的最小空闲连接
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 123.56.116.9:8848
+        register-enabled: true
+        enabled: true
+
+
+dubbo:
+  scan:
+    base-packages: com.zxk.demo.biz.service
+  registry:
+    address: spring-cloud://${spring.cloud.nacos.discovery.server-addr}
+  cloud:
+    subscribed-services: '*' # 设置订阅的应用列表，默认为 * 订阅所有应用
+  application:
+    name: ${spring.application.name}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

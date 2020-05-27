@@ -13,6 +13,8 @@ server:
     direct-buffers: true
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: admin-web
   redis:
@@ -55,8 +57,6 @@ mybatis-plus:
 
 
 dubbo:
-  scan:
-    base-packages: com.zxk.admin.biz.service
   protocols:
     dubbo:
       name: dubbo # 协议名称
@@ -64,7 +64,7 @@ dubbo:
   registry:
     address: spring-cloud://${spring.cloud.nacos.discovery.server-addr}
   cloud:
-    subscribed-services: '' # 设置订阅的应用列表，默认为 * 订阅所有应用
+    subscribed-services: '*' # 设置订阅的应用列表，默认为 * 订阅所有应用
 
 
 
@@ -107,7 +107,7 @@ security:
       - /**/*.ico
 ss:
   datasource:
-    names: admin,test$->{0..1}
+    names: admin
     admin:
       driverClassName: com.mysql.cj.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
@@ -131,22 +131,6 @@ ss:
         min-evictable-idle-time-millis:
         max-evictable-idle-time-millis:
         filters: #配置多个英文逗号分隔
-    test0:
-      driverClassName: com.mysql.cj.jdbc.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
-      url: jdbc:mysql://123.56.116.9:3306/test0?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-      username: root
-      password: 123456
-      druid-cfg:
-        max-active: 9
-    test1:
-      driverClassName: com.mysql.cj.jdbc.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
-      url: jdbc:mysql://123.56.116.9:3306/test1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-      username: root
-      password: 123456
-      druid-cfg:
-        max-active: 7
   druid:
     stat-view-servlet:
       enabled: true

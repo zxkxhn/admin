@@ -34,7 +34,7 @@ public class SecurityController {
 
     @GetMapping(value = "/login")
     @ApiOperation(value = "Swagger接口文档专用登录接口 方便测试")
-    public Result<Object> swaggerLogin(@RequestParam String username, @RequestParam String password,
+    public Result<String> swaggerLogin(@RequestParam String username, @RequestParam String password,
                                        @ApiParam("图片验证码ID") @RequestParam(required = false) String captchaId,
                                        @ApiParam("验证码") @RequestParam(required = false) String code,
                                        @ApiParam("记住密码") @RequestParam(required = false, defaultValue = "true") Boolean saveLogin,
@@ -52,6 +52,6 @@ public class SecurityController {
 
         JSONObject jsonObject = JSONObject.parseObject(result);
 
-        return new Result<>(jsonObject.getInteger("code"), jsonObject.getString("msg"));
+        return new Result(jsonObject.getInteger("code"), jsonObject.getString("msg"));
     }
 }
