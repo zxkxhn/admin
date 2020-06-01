@@ -11,11 +11,12 @@
 
     <modelVersion>4.0.0</modelVersion>
     <properties>
+        <project-name>admin</project-name>
         <admin-client.version>1.0.0-SNAPSHOT</admin-client.version>
     </properties>
 
-    <groupId>admin-web</groupId>
-    <artifactId>admin-web</artifactId>
+    <groupId>${project-name}-web</groupId>
+    <artifactId>${project-name}-web</artifactId>
     <packaging>jar</packaging>
 
 
@@ -65,7 +66,7 @@
 
 
     <build>
-        <finalName>${project.parent.artifactId}</finalName>
+        <finalName>${project-name}</finalName>
         <plugins>
             <!--打包jar-->
             <plugin>
@@ -82,7 +83,7 @@
                             <!--jar包不包含唯一版本标识-->
                             <useUniqueVersions>false</useUniqueVersions>
                             <!--指定入口类-->
-                            <mainClass>com.zxk.${project.parent.artifactId}.Application</mainClass>
+                            <mainClass>com.zxk.${project-name}.${project-name}Application</mainClass>
                         </manifest>
                         <manifestEntries>
                             <!--MANIFEST.MF 中 Class-Path 加入资源文件目录-->

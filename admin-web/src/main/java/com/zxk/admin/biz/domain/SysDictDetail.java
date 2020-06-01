@@ -4,14 +4,14 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ss.core.common.BaseDO;
-import com.zxk.admin.biz.enums.DataScopeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter
 @Setter
-@TableName("sys_role")
-public class SysRole extends BaseDO {
+@TableName("sys_dict_detail")
+public class SysDictDetail extends BaseDO {
 
     /**
      * ID
@@ -20,22 +20,17 @@ public class SysRole extends BaseDO {
     private long id;
 
     /**
-     * 名称
+     * 字典标签
      */
-    private String name;
+    private String label;
 
     /**
-     * 数据权限，全部 、 本级 、 自定义
+     * 字典值
      */
-    private String dataScope = DataScopeEnum.THIS_LEVEL.getValue();
+    private String value;
 
     /**
-     * 级别，数值越小，级别越大
+     * 排序
      */
-    private int level = 3;
-
-    /**
-     * 描述
-     */
-    private String description;
+    private Integer dictSort = 999;
 }

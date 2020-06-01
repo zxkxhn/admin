@@ -3,17 +3,16 @@ package com.zxk.admin.biz.domain;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ss.core.common.BaseDO;
 
-@TableName("sys_user_role")
-public class SysUserRole extends BaseDO {
-
-    /**
-     * 用户ID
-     */
-    private long userId;
+@TableName("sys_role_dept")
+public class SysRoleDept extends BaseDO {
 
     /**
      * 角色ID
      */
     private long roleId;
 
+    /**
+     *  部门ID
+     */
+    private long deptId;
 }

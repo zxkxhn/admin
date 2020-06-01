@@ -4,38 +4,29 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ss.core.common.BaseDO;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * 用户表
- *
- * @author xiaokun.zhang
- * Date:   2019年11月19日 16:19
- * @version 1.0
- */
-
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @TableName("sys_user")
 public class SysUser extends BaseDO {
 
-    private static final long serialVersionUID = 5755804560720746566L;
     /**
-     * 用户ID
+     * ID
      */
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(type = IdType.AUTO)
     private long id;
 
     /**
-     * 用户名
+     * 用户名称
      */
     private String username;
 
     /**
-     * 密码
+     * 用户昵称
      */
-    private String password;
+    private String nickName;
 
     /**
      * 邮箱
@@ -43,15 +34,37 @@ public class SysUser extends BaseDO {
     private String email;
 
     /**
-     * 手机号
+     * 电话号码
      */
-    private String mobile;
+    private String phone;
 
     /**
-     * 状态  1：禁用   0：正常
+     * 用户性别
      */
-    private int status;
+    private String gender;
 
+    /**
+     * 头像真实名称
+     */
+    private String avatarName;
+
+    /**
+     * 头像存储的路径
+     */
+    private String avatarPath;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+    /**
+     * 是否启用
+     */
+    private boolean enabled;
+
+    /**
+     * 是否为admin账号
+     */
+    private boolean isAdmin = false;
 }
-
-
