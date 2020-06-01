@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 
+/**
+ * 部门表
+ */
 @Getter
 @Setter
 @TableName("sys_dept")

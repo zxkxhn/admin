@@ -8,6 +8,9 @@ import com.zxk.admin.biz.enums.DataScopeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 角色关联表
+ */
 @Getter
 @Setter
 @TableName("sys_role")

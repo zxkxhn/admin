@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 
+/**
+ * 字典详情
+ */
 @Getter
 @Setter
 @TableName("sys_dict_detail")

@@ -7,6 +7,9 @@ import com.ss.core.common.BaseDO;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 用户表
+ */
 @Getter
 @Setter
 @TableName("sys_user")

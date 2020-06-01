@@ -7,7 +7,9 @@ import com.ss.core.common.BaseDO;
 import lombok.Getter;
 import lombok.Setter;
 
-
+/**
+ * 字典
+ */
 @Getter
 @Setter
 @TableName("sys_dict")
