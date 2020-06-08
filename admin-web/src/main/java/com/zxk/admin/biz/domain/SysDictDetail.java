@@ -35,5 +35,5 @@ public class SysDictDetail extends BaseDO {
     /**
      * 排序
      */
-    private Integer dictSort = 999;
+    private int dictSort = 999;
 }
