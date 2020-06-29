@@ -11,12 +11,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <properties>
-        <project-name>admin</project-name>
         <admin-client.version>1.0.0-SNAPSHOT</admin-client.version>
     </properties>
 
-    <groupId>${project-name}-web</groupId>
-    <artifactId>${project-name}-web</artifactId>
+    <groupId>admin</groupId>
+    <artifactId>admin-web</artifactId>
     <packaging>jar</packaging>
 
 
@@ -24,7 +23,7 @@
     <dependencies>
         <!-- 业务类 -->
         <dependency>
-            <groupId>admin-client</groupId>
+            <groupId>admin</groupId>
             <artifactId>admin-client</artifactId>
             <version>${admin-client.version}</version>
         </dependency>
@@ -67,12 +66,13 @@
 
 
     <build>
-        <finalName>${project-name}</finalName>
+        <finalName>${project.groupId}</finalName>
         <plugins>
             <!--打包jar-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
                 <configuration>
                     <!--不打包资源文件-->
                     <excludes>
@@ -84,7 +84,7 @@
                             <!--jar包不包含唯一版本标识-->
                             <useUniqueVersions>false</useUniqueVersions>
                             <!--指定入口类-->
-                            <mainClass>com.zxk.${project-name}.${project-name}Application</mainClass>
+                            <mainClass>com.zxk.${project.groupId}.${project.groupId}Application</mainClass>
                         </manifest>
                         <manifestEntries>
                             <!--MANIFEST.MF 中 Class-Path 加入资源文件目录-->
@@ -98,6 +98,7 @@
             <!--拷贝资源文件 copy-resources-->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -121,6 +122,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.3.1.RELEASE</version>
                 <configuration>
                     <!--使用外部配置文件，jar包里没有资源文件-->
                     <addResources>true</addResources>
