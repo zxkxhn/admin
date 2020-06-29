@@ -29,12 +29,6 @@
             <version>${admin-client.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>demo-client</groupId>
-            <artifactId>demo-client</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-
         <!-- 核心包 -->
         <dependency>
             <groupId>com.ss</groupId>
@@ -61,6 +55,13 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-captcha</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openjdk.jol/jol-core -->
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.9</version>
         </dependency>
     </dependencies>
 
